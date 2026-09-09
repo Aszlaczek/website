@@ -60,14 +60,14 @@ const HOBBIES = [
     emoji: "⛺",
     label: { en: "Summer camps", pl: "Obozy letnie" },
     note: {
-      en: "Camp counselor & organizer",
-      pl: "Wychowawca i organizator obozów",
+      en: "Camp counselor",
+      pl: "Wychowawca",
     },
   },
   {
-    emoji: "🏃",
-    label: { en: "Running", pl: "Bieganie" },
-    note: { en: "Active lifestyle", pl: "Aktywny tryb życia" },
+    emoji: "🎸",
+    label: { en: "Guitar & Ukulele", pl: "Gitara i ukulele" },
+    note: { en: "Amateur bedroom shredder", pl: "Amatorsko, w pokoju" },
   },
   {
     emoji: "📚",
@@ -79,7 +79,7 @@ const HOBBIES = [
 const STATS = [
   { value: "4+", key: "years" },
   { value: "MSc", key: "degree" },
-  { value: "5+", key: "karate" },
+  { value: "15+", key: "karate" },
   { value: "5+", key: "camps" },
 ];
 
