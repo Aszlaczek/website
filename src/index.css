@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --background: #090909;
+  --foreground: #f0efe9;
+  --card: #111111;
+  --primary: #d4ff1e;
+  --primary-foreground: #090909;
+  --muted: #1a1a1a;
+  --muted-foreground: #666660;
+  --border: #222222;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+html, body, #root {
+  height: 100%;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+* { scrollbar-width: none; }
+*::-webkit-scrollbar { display: none; }
+::selection { background: var(--primary); color: var(--primary-foreground); }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes float {
+  0%, 100% { transform: rotate(-4deg) translateY(0px); }
+  50%       { transform: rotate(-4deg) translateY(-8px); }
+}
+@keyframes floatAlt {
+  0%, 100% { transform: rotate(3deg) translateY(0px); }
+  50%       { transform: rotate(3deg) translateY(-6px); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+.float-badge   { animation: float    3s ease-in-out infinite; }
+.float-badge-2 { animation: floatAlt 4s ease-in-out infinite; }
+.spin-slow     { animation: spin-slow 14s linear infinite; }
+
+.project-card {
+  transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s ease;
+}
+.project-card:hover {
+  transform: rotate(-1deg) scale(1.01) translateY(-4px);
+  box-shadow: 6px 6px 0 var(--primary);
+}
+
+.skill-pill {
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+  cursor: default;
+}
+.skill-pill:hover {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  transform: translateY(-2px);
+}
+
+.nav-link {
+  position: relative;
+  color: var(--muted-foreground);
+  transition: color 0.2s;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 0; height: 1px;
+  background: var(--primary);
+  transition: width 0.2s;
+}
+.nav-link:hover { color: var(--primary); }
+.nav-link:hover::after { width: 100%; }
+
+.bento-card {
+  border: 1px solid var(--border);
+  background: var(--card);
+  transition: border-color 0.2s;
+}
+.bento-card:hover { border-color: var(--primary); }
+
+.hobby-tag {
+  transition: background 0.15s, color 0.15s;
+  cursor: default;
+}
+.hobby-tag:hover {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
