@@ -1,5 +1,134 @@
 import { useState } from "react";
 import { useLanguage } from "./context/LanguageContext";
+import type { Translations } from "./Language";
+
+function PhotoFrame({ t }: { t: Translations }) {
+  return (
+    <div className="relative" style={{ width: 320, height: 520 }}>
+      {/* photo frame */}
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          border: "3px solid var(--primary)",
+          borderRadius: 6,
+          backgroundColor: "var(--card)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <div
+          className="flex flex-col items-center justify-center text-center"
+          style={{
+            color: "var(--muted-foreground)",
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            opacity: 0.4,
+          }}
+        >
+          <svg
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ marginBottom: 10 }}
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+          Photo
+        </div>
+      </div>
+
+      {/* top-left tag */}
+      <div
+        className="px-4 py-2"
+        style={{
+          position: "absolute",
+          top: -14,
+          left: -20,
+          backgroundColor: "var(--primary)",
+          color: "var(--primary-foreground)",
+          fontFamily: "var(--font-mono)",
+          fontSize: 11,
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          transform: "rotate(-5deg)",
+          whiteSpace: "nowrap",
+        }}
+      >
+        🥋 {t.hero.karate.replace("\n", " ")}
+      </div>
+
+      {/* right circular text */}
+      <div
+        className="spin-slow"
+        style={{
+          position: "absolute",
+          top: "50%",
+          right: -44,
+          transform: "translateY(-50%)",
+          width: 88,
+          height: 88,
+        }}
+      >
+        <svg viewBox="0 0 100 100" width="88" height="88">
+          <defs>
+            <path
+              id="circlePath"
+              d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+            />
+          </defs>
+          <text
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+              fill: "var(--muted-foreground)",
+            }}
+          >
+            <textPath href="#circlePath">
+              WEB DEV · SENSEI ·{" "}
+            </textPath>
+          </text>
+        </svg>
+      </div>
+
+      {/* bottom-right tag */}
+      <div
+        className="px-3 py-1.5"
+        style={{
+          position: "absolute",
+          bottom: -10,
+          right: -10,
+          backgroundColor: "var(--background)",
+          color: "var(--primary)",
+          border: "1px solid var(--primary)",
+          fontFamily: "var(--font-mono)",
+          fontSize: 10,
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          whiteSpace: "nowrap",
+        }}
+      >
+        ⚡ MSc Eng.
+      </div>
+    </div>
+  );
+}
 
 const TICKER_ITEMS = [
   "React",
@@ -192,7 +321,7 @@ export default function App() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="min-h-screen pt-24 px-6 md:px-12 pb-0 grid md:grid-cols-[1fr_auto] gap-12 items-center relative overflow-hidden">
+      <section className="min-h-screen pt-24 px-6 md:px-12 pb-0 grid md:grid-cols-[1fr_auto] gap-6 lg:gap-8 items-center relative overflow-hidden">
         <div className="z-10 max-w-3xl">
           <div className="flex flex-wrap items-center gap-3 mb-8">
             <span
@@ -312,64 +441,16 @@ export default function App() {
               </span>
             ))}
           </div>
+
+          {/* mobile photo — below text on small screens */}
+          <div className="flex lg:hidden justify-center mt-12">
+            <PhotoFrame t={t} />
+          </div>
         </div>
 
-        <div className="hidden lg:flex relative flex-col items-center justify-center gap-6 pr-4">
-          <div
-            className="float-badge px-5 py-3 text-center"
-            style={{
-              backgroundColor: "var(--primary)",
-              color: "var(--primary-foreground)",
-              fontFamily: "var(--font-mono)",
-              fontSize: 12,
-              fontWeight: 500,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              transform: "rotate(-4deg)",
-              maxWidth: 160,
-            }}
-          >
-            🥋 {t.hero.karate}
-          </div>
-          <div
-            style={{ width: 1, height: 80, backgroundColor: "var(--border)" }}
-          />
-          <div
-            className="float-badge-2 px-5 py-3 text-center"
-            style={{
-              backgroundColor: "var(--background)",
-              color: "var(--primary)",
-              border: "1px solid var(--primary)",
-              fontFamily: "var(--font-mono)",
-              fontSize: 12,
-              fontWeight: 500,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              transform: "rotate(3deg)",
-              maxWidth: 160,
-            }}
-          >
-            ⛺ {t.hero.campLead}
-          </div>
-          <div
-            style={{ width: 1, height: 80, backgroundColor: "var(--border)" }}
-          />
-          <div
-            className="px-5 py-3 text-center"
-            style={{
-              backgroundColor: "var(--background)",
-              color: "var(--muted-foreground)",
-              border: "1px solid var(--border)",
-              fontFamily: "var(--font-mono)",
-              fontSize: 12,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              maxWidth: 160,
-              transform: "rotate(1deg)",
-            }}
-          >
-            📚 {t.hero.travelGuide}
-          </div>
+        {/* desktop photo — right side on lg+ */}
+        <div className="hidden lg:flex relative items-center justify-center -ml-8">
+          <PhotoFrame t={t} />
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none select-none">
