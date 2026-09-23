@@ -10,6 +10,7 @@
     "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
+    "@openai/codex-sdk": "^0.156.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
