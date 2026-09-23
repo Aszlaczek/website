@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { translations, type Lang, type Translations } from "../Language";
 
 interface LanguageCtx {
@@ -16,10 +16,15 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     return navigator.language.startsWith("pl") ? "pl" : "en";
   });
 
+  useEffect(() => {
+    document.documentElement.setAttribute("lang", lang);
+  }, [lang]);
+
   function toggle() {
     setLang((prev) => {
       const next = prev === "en" ? "pl" : "en";
       localStorage.setItem("lang", next);
+      document.documentElement.setAttribute("lang", next);
       return next;
     });
   }

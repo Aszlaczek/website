@@ -321,7 +321,7 @@ export default function App() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="min-h-screen pt-24 px-6 md:px-12 pb-0 grid md:grid-cols-[1fr_auto] gap-6 lg:gap-8 items-center relative overflow-hidden">
+      <section aria-label="Hero" className="min-h-screen pt-24 px-6 md:px-12 pb-0 grid md:grid-cols-[1fr_auto] gap-6 lg:gap-8 items-center relative overflow-hidden">
         <div className="z-10 max-w-3xl">
           <div className="flex flex-wrap items-center gap-3 mb-8">
             <span
@@ -496,10 +496,7 @@ export default function App() {
       </div>
 
       {/* ── STATS ── */}
-      <section
-        className="px-6 md:px-12 py-16 grid grid-cols-2 md:grid-cols-4"
-        style={{ borderBottom: "1px solid var(--border)" }}
-      >
+      <section aria-label="Statistics" className="px-6 md:px-12 py-16 grid grid-cols-2 md:grid-cols-4" style={{ borderBottom: "1px solid var(--border)" }}>
         {STATS.map((s, i) => (
           <div
             key={s.key}
@@ -534,11 +531,7 @@ export default function App() {
       </section>
 
       {/* ── ABOUT ── */}
-      <section
-        id="about"
-        className="px-6 md:px-12 py-24"
-        style={{ borderBottom: "1px solid var(--border)" }}
-      >
+      <section id="about" aria-label="About me" className="px-6 md:px-12 py-24" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex items-baseline gap-4 mb-12">
           <span
             style={{
@@ -788,6 +781,8 @@ export default function App() {
 
       {/* ── WORK EXPERIENCE ── */}
       <section
+        id="experience"
+        aria-label="Work experience"
         className="px-6 md:px-12 py-24"
         style={{ borderBottom: "1px solid var(--border)" }}
       >
@@ -896,11 +891,7 @@ export default function App() {
       </section>
 
       {/* ── PROJECTS ── */}
-      <section
-        id="projects"
-        className="px-6 md:px-12 py-24"
-        style={{ borderBottom: "1px solid var(--border)" }}
-      >
+      <section id="projects" aria-label="Projects" className="px-6 md:px-12 py-24" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex flex-wrap items-baseline justify-between gap-4 mb-12">
           <div className="flex items-baseline gap-4">
             <span
@@ -1048,11 +1039,7 @@ export default function App() {
       </section>
 
       {/* ── SKILLS ── */}
-      <section
-        id="skills"
-        className="px-6 md:px-12 py-24"
-        style={{ borderBottom: "1px solid var(--border)" }}
-      >
+      <section id="skills" aria-label="Skills" className="px-6 md:px-12 py-24" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex items-baseline gap-4 mb-12">
           <span
             style={{
@@ -1191,6 +1178,7 @@ export default function App() {
       {/* ── CONTACT ── */}
       <section
         id="contact"
+        aria-label="Get in touch"
         className="px-6 md:px-12 py-28 relative overflow-hidden"
       >
         <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none">
@@ -1230,32 +1218,32 @@ export default function App() {
               {t.contact.section}
             </h2>
           </div>
-          <h3
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(2.5rem,6vw,5.5rem)",
-              fontWeight: 900,
-              lineHeight: 0.95,
-              letterSpacing: "-0.02em",
-            }}
-          >
+<h2
+             style={{
+               fontFamily: "var(--font-display)",
+               fontSize: "clamp(2.5rem,6vw,5.5rem)",
+               fontWeight: 900,
+               lineHeight: 0.95,
+               letterSpacing: "-0.02em",
+             }}
+           >
             {t.contact.title1}
             <br />
             <em className="not-italic" style={{ color: "var(--primary)" }}>
               {t.contact.title2}
             </em>
-          </h3>
-          <p
-            className="mt-8 mb-10 max-w-md"
-            style={{
-              fontSize: 16,
-              lineHeight: 1.75,
-              color: "var(--muted-foreground)",
-              fontWeight: 300,
-            }}
-          >
-            {t.contact.desc}
-          </p>
+</h2>
+           <p
+             className="mt-8 mb-10 max-w-md"
+             style={{
+               fontSize: 16,
+               lineHeight: 1.75,
+               color: "var(--muted-foreground)",
+               fontWeight: 300,
+             }}
+           >
+             {t.contact.desc}
+           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={copyEmail}
