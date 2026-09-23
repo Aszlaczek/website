@@ -9,12 +9,43 @@ interface LanguageCtx {
 
 const LanguageContext = createContext<LanguageCtx | null>(null);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>(() => {
+function getInitialLang(): Lang {
+  if (typeof window !== "undefined") {
+    const param = new URLSearchParams(window.location.search).get("lang");
+    if (param === "en" || param === "pl") return param;
+  }
+  try {
     const saved = localStorage.getItem("lang");
     if (saved === "en" || saved === "pl") return saved;
-    return navigator.language.startsWith("pl") ? "pl" : "en";
-  });
+  } catch {
+    /* localStorage unavailable (private mode / SSR) */
+  }
+  if (typeof navigator !== "undefined" && navigator.language?.startsWith("pl")) return "pl";
+  return "en";
+}
+
+function applyLang(lang: Lang, syncUrl: boolean) {
+  document.documentElement.setAttribute("lang", lang);
+  try {
+    localStorage.setItem("lang", lang);
+  } catch {
+    /* ignore */
+  }
+  if (syncUrl && typeof window !== "undefined" && window.history?.replaceState) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", lang);
+    window.history.replaceState(null, "", url);
+  }
+}
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  // Start with "en" so hydration always matches the prerendered HTML,
+  // then switch to the visitor's language after mount.
+  const [lang, setLang] = useState<Lang>("en");
+
+  useEffect(() => {
+    setLang(getInitialLang());
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute("lang", lang);
@@ -23,8 +54,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   function toggle() {
     setLang((prev) => {
       const next = prev === "en" ? "pl" : "en";
-      localStorage.setItem("lang", next);
-      document.documentElement.setAttribute("lang", next);
+      applyLang(next, true);
       return next;
     });
   }

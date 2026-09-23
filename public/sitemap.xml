@@ -7,5 +7,6 @@
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aszlaczek.github.io/website/?lang=en" />
     <xhtml:link rel="alternate" hreflang="pl" href="https://aszlaczek.github.io/website/?lang=pl" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aszlaczek.github.io/website/" />
   </url>
 </urlset>

@@ -60,25 +60,25 @@ export const pl: typeof en = {
     items: [
       {
         tag: "Aplikacja web",
-        desc: "Aplikacja do śledzenia i odmierzania czasu. Zbudowana w React i TypeScript, wdrożona na Vercel.",
+        desc: "Aplikacja do śledzenia i odmierzania czasu, idealna do pracy w skupieniu. Zbudowana w React i TypeScript, z typowanym reducerem i licznikami, które nie powodują skoków layoutu. Wdrożona na Vercel z podglądem dla każdego pusha. Rozwiązuje problem: szybkie, darmowe mierzenie czasu bez rejestracji. Wniosek: dopięcie małego, dopracowanego narzędzia od UI po CI.",
         demo: "https://counter-psi-blush.vercel.app/",
         code: "https://github.com/Aszlaczek/Counter",
       },
       {
         tag: "Narzędzie AI",
-        desc: "Narzędzie AI do wyszukiwania i słowników. Aplikacja full-stack z czystym, intuicyjnym interfejsem.",
+        desc: "Narzędzie AI do wyszukiwania i tłumaczenia słów oraz zwrotów prostym językiem. Full-stack: front end w React i TypeScript, warstwa API w Node.js i strumieniowe odpowiedzi modelu, wszystko w czystym, intuicyjnym interfejsie. Dostępne od razu na Vercel. Rozwiązuje problem: wolne, pełne reklam zamienniki słowników — teraz jedno szybkie wyszukiwanie. Wniosek: odpowiedzialna integracja LLM-ów ze stanami ładowania, błędów i limitów.",
         demo: "https://teacherai-mu.vercel.app",
         code: "https://github.com/Aszlaczek/Teacher_AI",
       },
       {
         tag: "Narzędzie",
-        desc: "Narzędzie do sprawdzania i konwersji kolorów. Czytelny interfejs z podglądem kolorów w czasie rzeczywistym.",
+        desc: "Wygodne narzędzie do sprawdzania i konwersji kolorów w formatach HEX, RGB i HSL. Napisane w React i TypeScript, z podglądem na żywo i kopiowaniem dowolnego formatu jednym kliknięciem. Wdrożone na Vercel. Rozwiązuje problem: chaotyczny deskopowy workflow zastąpiony jednym narzędziem w przeglądarce. Wniosek: analiza danych wejściowych, kontrast pod kątem dostępności i minimalny, szybki UI.",
         demo: "https://colorchecker-omega.vercel.app/",
         code: "https://github.com/Aszlaczek/ColorChecker",
       },
       {
         tag: "Gra",
-        desc: "Przeglądarkowa gra pamięciowa. Interaktywna gra polegająca na dopasowywaniu kart, zbudowana w czystym JavaScript.",
+        desc: "Przeglądarkowa gra pamięciowa z kilkoma poziomami trudności, licznikiem ruchów i restartem. Napisana w czystym JavaScript — bez frameworków: DOM, przejścia CSS i najlepsze wyniki w localStorage. Hostowana na Vercel. Rozwiązuje problem: atrakcyjny, wolny od zależności pokaz zarządzania stanem od zera. Wniosek: pętla gry, timery i czysta organizacja kodu bez Reacta.",
         demo: "https://memory-game-tan-five.vercel.app",
         code: "https://github.com/Aszlaczek/memory-game",
       },

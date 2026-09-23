@@ -60,25 +60,25 @@ export const en = {
     items: [
       {
         tag: "Web App",
-        desc: "An app for tracking and counting time. Built with React and TypeScript, deployed on Vercel.",
+        desc: "A focused time-tracking and countdown tool for staying on top of deep-work sessions. Built with React and TypeScript, it keeps state predictable with a typed reducer and renders live timers without layout jitter. Deployed on Vercel with automatic previews for every push. Problem solved: quick, distraction-free timing without signing up for a SaaS. Takeaway: shipping a small, polished utility end to end — from UI states to CI deploys.",
         demo: "https://counter-psi-blush.vercel.app/",
         code: "https://github.com/Aszlaczek/Counter",
       },
       {
         tag: "AI Tool",
-        desc: "An AI-powered search and dictionary tool. Full-stack application with a clean, intuitive interface.",
+        desc: "An AI-powered search and dictionary tool that explains words and phrases in plain language. Full-stack build with a React + TypeScript front end, a Node.js API layer and streaming AI responses, wrapped in a clean, intuitive interface. Deployed on Vercel so anyone can try it instantly. Problem solved: turning slow, ad-heavy reference sites into one fast conversational lookup. Takeaway: integrating LLM APIs responsibly with loading, error and rate-limit states.",
         demo: "https://teacherai-mu.vercel.app",
         code: "https://github.com/Aszlaczek/Teacher_AI",
       },
       {
         tag: "Utility App",
-        desc: "A tool for checking and converting colors. Clean UI with real-time color preview and format conversion.",
+        desc: "A developer-friendly color tool for checking, converting and previewing colors in HEX, RGB and HSL. Built with React and TypeScript, it updates the preview in real time and copies any format to the clipboard in one click. Deployed on Vercel for instant access. Problem solved: replacing a messy desktop workflow with one keyboard-friendly browser tool. Takeaway: careful input parsing, accessibility contrast handling and a minimal, fast UI.",
         demo: "https://colorchecker-omega.vercel.app/",
         code: "https://github.com/Aszlaczek/ColorChecker",
       },
       {
         tag: "Game",
-        desc: "A browser-based memory game. Interactive card-matching game built with vanilla JavaScript.",
+        desc: "A browser-based memory card-matching game with multiple difficulty levels, move counters and a restart flow. Written in vanilla JavaScript with no frameworks — just the DOM, CSS transitions and localStorage for best scores. Hosted on Vercel. Problem solved: an entertaining, dependency-free demo of state management from scratch. Takeaway: fundamentals of game loops, timers and clean code organization without React.",
         demo: "https://memory-game-tan-five.vercel.app",
         code: "https://github.com/Aszlaczek/memory-game",
       },
