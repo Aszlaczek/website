@@ -60,6 +60,12 @@ export const en = {
     items: [
       {
         tag: "Web App",
+        desc: "A full-stack gym progress platform for planning, logging, and analyzing strength workouts. Built with Next.js, TypeScript, and Tailwind CSS, with a Supabase backend (PostgreSQL + RLS + Auth). Features routine planning, live workout logging with timers, exercise library, interactive progress charts with PR tracking, and a mobile-first design with bottom navigation. Problem solved: replacing scattered spreadsheets and notes with one unified workout tracker. Takeaway: full-stack app with auth, row-level security, complex state management, and responsive design from scratch.",
+        demo: "https://work-out-theta.vercel.app",
+        code: "https://github.com/Aszlaczek/work-out",
+      },
+      {
+        tag: "Web App",
         desc: "A focused time-tracking and countdown tool for staying on top of deep-work sessions. Built with React and TypeScript, it keeps state predictable with a typed reducer and renders live timers without layout jitter. Deployed on Vercel with automatic previews for every push. Problem solved: quick, distraction-free timing without signing up for a SaaS. Takeaway: shipping a small, polished utility end to end — from UI states to CI deploys.",
         demo: "https://counter-psi-blush.vercel.app/",
         code: "https://github.com/Aszlaczek/Counter",

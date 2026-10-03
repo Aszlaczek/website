@@ -60,6 +60,12 @@ export const pl: typeof en = {
     items: [
       {
         tag: "Aplikacja web",
+        desc: "Full-stackowa platforma do śledzenia postępów na treningu siłowym — planowanie, logowanie i analiza treningów. Zbudowana w Next.js, TypeScript i Tailwind CSS, z backendem Supabase (PostgreSQL + RLS + Auth). Obejmuje planowanie rutyn, logowanie treningów na żywo z stoperem, bibliotekę ćwiczeń, interaktywne wykresy postępów z śledzeniem rekordów oraz mobile-first design z dolną nawigacją. Rozwiązuje problem: zastąpienie rozproszonych arkuszy i notatek jednym narzędziem. Wniosek: aplikacja full-stack z autoryzacją, RLS, złożonym zarządzaniem stanem i responsywnym designem od zera.",
+        demo: "https://work-out-theta.vercel.app",
+        code: "https://github.com/Aszlaczek/work-out",
+      },
+      {
+        tag: "Aplikacja web",
         desc: "Aplikacja do śledzenia i odmierzania czasu, idealna do pracy w skupieniu. Zbudowana w React i TypeScript, z typowanym reducerem i licznikami, które nie powodują skoków layoutu. Wdrożona na Vercel z podglądem dla każdego pusha. Rozwiązuje problem: szybkie, darmowe mierzenie czasu bez rejestracji. Wniosek: dopięcie małego, dopracowanego narzędzia od UI po CI.",
         demo: "https://counter-psi-blush.vercel.app/",
         code: "https://github.com/Aszlaczek/Counter",
