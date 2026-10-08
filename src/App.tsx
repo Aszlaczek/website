@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useLanguage } from "./context/LanguageContext";
 
+const EMAIL = "awzorek23@gmail.com";
 
+const PROFILE_IMAGE =
+  "https://images.unsplash.com/photo-1650661926447-9efb2610f64c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600";
 
 const TICKER_ITEMS = [
   "React",
@@ -27,60 +30,36 @@ const PROJECTS = [
     num: "01",
     title: "Work Out",
     year: "2025",
-    accent: "#d4ff1e",
+    tone: "lime",
+    stack: ["Next.js", "TypeScript", "Supabase"],
   },
   {
     num: "02",
     title: "Time Tracker",
     year: "2025",
-    accent: "#60a5fa",
+    tone: "violet",
+    stack: ["React", "TypeScript"],
   },
   {
     num: "03",
     title: "AI Dictionary",
     year: "2025",
-    accent: "#f87171",
+    tone: "cyan",
+    stack: ["React", "TypeScript", "Node.js"],
   },
   {
     num: "04",
     title: "Color Picker",
     year: "2025",
-    accent: "#a78bfa",
+    tone: "coral",
+    stack: ["React", "TypeScript"],
   },
   {
     num: "05",
     title: "Memory Game",
     year: "2025",
-    accent: "#f97316",
-  },
-];
-
-const HOBBIES = [
-  {
-    emoji: "🥋",
-    label: { en: "Karate — Instructor", pl: "Karate — Instruktor" },
-    note: {
-      en: "5+ years, active instructor",
-      pl: "5+ lat, aktywny instruktor",
-    },
-  },
-  {
-    emoji: "⛺",
-    label: { en: "Summer camps", pl: "Obozy letnie" },
-    note: {
-      en: "Camp counselor",
-      pl: "Wychowawca",
-    },
-  },
-  {
-    emoji: "🎸",
-    label: { en: "Guitar & Ukulele", pl: "Gitara i ukulele" },
-    note: { en: "Amateur bedroom shredder", pl: "Amatorsko, w pokoju" },
-  },
-  {
-    emoji: "📚",
-    label: { en: "Tech reading", pl: "Czytanie techniczne" },
-    note: { en: "Always learning", pl: "Zawsze się uczę" },
+    tone: "lime",
+    stack: ["JavaScript", "localStorage"],
   },
 ];
 
@@ -93,20 +72,78 @@ const STATS = [
 
 const NAV_LINKS = ["about", "projects", "skills", "contact"] as const;
 
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M5 15 15 5M7 5h8v8" />
+    </svg>
+  );
+}
+
+function MenuIcon() {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M3 6h14M3 10h14M3 14h14" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M5 5l10 10M15 5L5 15" />
+    </svg>
+  );
+}
+
+function SectionTitle({
+  number,
+  eyebrow,
+  children,
+}: {
+  number: string;
+  eyebrow: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="section-heading reveal">
+      <div className="section-kicker">
+        <span>{number}</span>
+        <span>{eyebrow}</span>
+      </div>
+      <h2>{children}</h2>
+    </div>
+  );
+}
+
 export default function App() {
   const { lang, t, toggle } = useLanguage();
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [activeTab, setActiveTab] = useState<"projects" | "all">("projects");
+  const [showAll, setShowAll] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
 
-  function copyEmail() {
-    navigator.clipboard.writeText("awzorek23@gmail.com");
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
-  }
+  useEffect(() => {
+    if (!navOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setNavOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [navOpen]);
 
   const ticker = [...TICKER_ITEMS, ...TICKER_ITEMS];
-  const visibleProjects =
-    activeTab === "projects" ? PROJECTS.slice(0, 3) : PROJECTS;
+  const visibleProjects = showAll ? PROJECTS : PROJECTS.slice(0, 3);
+
+  function copyEmail() {
+    navigator.clipboard.writeText(EMAIL);
+    setCopiedEmail(true);
+    window.setTimeout(() => setCopiedEmail(false), 1800);
+  }
 
   const navLabels = {
     about: t.nav.about,
@@ -115,1094 +152,477 @@ export default function App() {
     contact: t.nav.contact,
   };
 
+  const softSkills = [
+    { label: t.skills.communication, text: t.skills.communicationDesc },
+    { label: t.skills.leadership, text: t.skills.leadershipDesc },
+    { label: t.skills.discipline, text: t.skills.disciplineDesc },
+  ];
+
+  const experiences = [
+    {
+      num: "01",
+      title: t.about.exp1Title,
+      company: t.about.exp1Company,
+      date: t.about.exp1Date,
+      desc: t.about.exp1Desc,
+    },
+    {
+      num: "02",
+      title: t.about.exp2Title,
+      company: t.about.exp2Company,
+      date: t.about.exp2Date,
+      desc: t.about.exp2Desc,
+    },
+  ];
+
   return (
-    <div
-      style={{
-        backgroundColor: "var(--background)",
-        color: "var(--foreground)",
-        fontFamily: "var(--font-body)",
-      }}
-    >
-      {/* ── NAV ── */}
-      <nav
-        aria-label="Main"
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-5"
-        style={{
-          backgroundColor: "rgba(9,9,9,0.88)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid var(--border)",
-        }}
-      >
-        <div className="flex items-center gap-2">
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 13,
-              color: "var(--foreground)",
-            }}
-          >
-            Adrian<span style={{ color: "var(--primary)" }}>.</span>dev
-          </span>
-          <span
-            className="hidden sm:inline text-xs px-2 py-0.5"
-            style={{
-              fontFamily: "var(--font-mono)",
-              border: "1px solid var(--border)",
-              color: "var(--muted-foreground)",
-              fontSize: 11,
-            }}
-          >
-            MSc Eng.
-          </span>
-        </div>
-        <ul className="hidden md:flex gap-8">
+    <main className="site-shell">
+      <div className="ambient ambient-one" />
+      <div className="ambient ambient-two" />
+
+      <nav className="nav-wrap" aria-label="Primary navigation">
+        <a className="brand" href="#top" aria-label="Homepage">
+          Adrian<span>.dev</span>
+        </a>
+        <div className="nav-links">
           {NAV_LINKS.map((l) => (
-            <li key={l}>
-              <a
-                href={`#${l}`}
-                className="nav-link text-sm uppercase tracking-widest"
-                style={{ fontFamily: "var(--font-mono)", fontSize: 12 }}
-              >
-                {navLabels[l]}
-              </a>
-            </li>
+            <a key={l} href={`#${l}`}>
+              {navLabels[l]}
+            </a>
           ))}
-        </ul>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={toggle}
-            className="text-xs px-3 py-2 uppercase tracking-widest font-medium transition-opacity duration-200"
-            style={{
-              border: "1px solid var(--border)",
-              color: "var(--muted-foreground)",
-              fontFamily: "var(--font-mono)",
-              cursor: "pointer",
-              backgroundColor: "transparent",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.82")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          >
+        </div>
+        <div className="nav-actions">
+          <button className="nav-ghost" onClick={toggle} type="button">
             {lang === "en" ? "PL" : "EN"}
           </button>
-          <a
-            href="#contact"
-            className="text-xs px-4 py-2 uppercase tracking-widest font-medium transition-opacity duration-200"
-            style={{
-              backgroundColor: "var(--primary)",
-              color: "var(--primary-foreground)",
-              fontFamily: "var(--font-mono)",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.82")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          >
-            {t.nav.hireMe}
+          <a className="nav-cta" href="#contact">
+            {t.nav.hireMe} <ArrowIcon />
           </a>
+          <button
+            className="nav-hamburger"
+            onClick={() => setNavOpen((open) => !open)}
+            type="button"
+            aria-label={navOpen ? t.nav.closeMenu : t.nav.menu}
+            aria-expanded={navOpen}
+            aria-controls="nav-sheet"
+          >
+            {navOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
         </div>
       </nav>
 
-      {/* ── HERO ── */}
-      <section aria-label="Hero" className="min-h-screen pt-24 px-6 md:px-12 pb-0 grid md:grid-cols-[1fr_auto] gap-6 lg:gap-8 items-center relative overflow-hidden">
-        <div className="z-10 max-w-3xl">
-          <div className="flex flex-wrap items-center gap-3 mb-8">
-            <span
-              className="inline-block w-2 h-2 rounded-full"
-              style={{ backgroundColor: "var(--primary)" }}
-            />
-            <span
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 12,
-                color: "var(--muted-foreground)",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-              }}
+      <div
+        id="nav-sheet"
+        className={`nav-sheet${navOpen ? " is-open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={t.nav.menu}
+        aria-hidden={!navOpen}
+      >
+        <div
+          className="nav-sheet-backdrop"
+          onClick={() => setNavOpen(false)}
+        />
+        <nav className="nav-sheet-panel" aria-label={t.nav.menu}>
+          <div className="nav-sheet-head">
+            <span>{t.nav.menu}</span>
+            <button
+              className="nav-sheet-close"
+              onClick={() => setNavOpen(false)}
+              type="button"
+              aria-label={t.nav.closeMenu}
             >
-              {t.hero.openToWork}
-            </span>
-            <span
-              className="px-2 py-0.5 text-xs"
-              style={{
-                fontFamily: "var(--font-mono)",
-                border: "1px solid rgba(212,255,30,0.3)",
-                color: "var(--primary)",
-                fontSize: 11,
-              }}
-            >
-              {t.hero.degree}
-            </span>
+              <CloseIcon />
+            </button>
           </div>
-
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(3.2rem,8vw,7.5rem)",
-              fontWeight: 900,
-              lineHeight: 0.9,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            {t.hero.title1}
-            <br />
-            <em className="not-italic" style={{ color: "var(--primary)" }}>
-              {t.hero.title2}
-            </em>
-            <br />
-            <span
-              style={{
-                fontWeight: 300,
-                fontStyle: "italic",
-                fontSize: "0.82em",
-              }}
-            >
-              {t.hero.title3}
-            </span>
-          </h1>
-
-          <p
-            className="mt-8 mb-10 max-w-xl"
-            style={{
-              fontSize: 17,
-              lineHeight: 1.8,
-              color: "var(--muted-foreground)",
-              fontWeight: 300,
-            }}
-          >
-            {t.hero.desc}
-          </p>
-
-          <div className="flex flex-wrap gap-3 mb-12">
-            <a
-              href="#projects"
-              className="px-6 py-3 text-sm uppercase tracking-widest font-medium transition-opacity duration-200"
-              style={{
-                backgroundColor: "var(--primary)",
-                color: "var(--primary-foreground)",
-                fontFamily: "var(--font-mono)",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.82")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-            >
-              {t.hero.seeWork}
-            </a>
-            <a
-              href={`files/Adrian_Wzorek_CV_${lang}.pdf`}
-              className="px-6 py-3 text-sm uppercase tracking-widest transition-all duration-200"
-              style={{
-                border: "1px solid var(--border)",
-                color: "var(--muted-foreground)",
-                fontFamily: "var(--font-mono)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--primary)";
-                e.currentTarget.style.color = "var(--primary)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.color = "var(--muted-foreground)";
-              }}
-            >
-              {t.hero.downloadCv}
-            </a>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {HOBBIES.map((h) => (
-              <span
-                key={h.label.en}
-                className="hobby-tag flex items-center gap-1.5 px-3 py-1.5 text-xs"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  border: "1px solid var(--border)",
-                  color: "var(--muted-foreground)",
-                  backgroundColor: "var(--card)",
-                }}
-              >
-                <span>{h.emoji}</span> {h.label[lang]}
-              </span>
+          <ul className="nav-sheet-links">
+            {NAV_LINKS.map((l) => (
+              <li key={l}>
+                <a href={`#${l}`} onClick={() => setNavOpen(false)}>
+                  {navLabels[l]}
+                </a>
+              </li>
             ))}
+          </ul>
+          <div className="nav-sheet-foot">
+            <button className="nav-ghost" onClick={toggle} type="button">
+              {lang === "en" ? "PL" : "EN"}
+            </button>
+            <a
+              className="nav-cta"
+              href="#contact"
+              onClick={() => setNavOpen(false)}
+            >
+              {t.nav.hireMe} <ArrowIcon />
+            </a>
           </div>
+        </nav>
+      </div>
 
+      <section className="hero" id="top">
+        <div className="hero-prologue" aria-hidden="true">
+          {t.hero.ghostText}
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none select-none">
-          <p
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(4rem,14vw,13rem)",
-              fontWeight: 900,
-              color: "rgba(255,255,255,0.022)",
-              lineHeight: 1,
-              letterSpacing: "-0.04em",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {t.hero.ghostText}
-          </p>
+        <div className="hero-copy">
+          <div className="availability reveal">
+            <span className="status-dot" />
+            {t.hero.openToWork}
+            <span className="availability-place">{t.hero.degree}</span>
+          </div>
+
+          <div className="hero-chapter-label">
+            <span>00</span>
+            <p>{t.hero.chapterLabel}</p>
+          </div>
+
+          <h1 className="hero-title">
+            <span className="title-line title-line-one">{t.hero.title1}</span>
+            <span className="title-line title-line-two">
+              <em>{t.hero.title2}</em>
+            </span>
+            <span className="title-line title-line-three">{t.hero.title3}</span>
+          </h1>
+
+          <div className="hero-bottom reveal">
+            <div>
+              <p>{t.hero.desc}</p>
+              <div className="hero-values" aria-label="Personal values">
+                {t.hero.values.map((value) => (
+                  <span key={value}>{value}</span>
+                ))}
+              </div>
+            </div>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#projects">
+                {t.hero.seeWork} <ArrowIcon />
+              </a>
+              <a
+                className="button button-ghost"
+                href={`files/Adrian_Wzorek_CV_${lang}.pdf`}
+              >
+                {t.hero.downloadCv} <span>↓</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-aside">
+          <figure className="hero-profile-card">
+            <div className="hero-profile-image">
+              <img
+                src={PROFILE_IMAGE}
+                alt="Laptop in a focused developer workspace"
+              />
+              <span>{t.about.openToWork}</span>
+              <i>{t.about.relocation}</i>
+            </div>
+            <figcaption>
+              <span className="profile-kicker">{t.about.profileCard.kicker}</span>
+              <p>{t.about.profileCard.paragraph}</p>
+              <div className="profile-stats">
+                <div>
+                  <strong>4+</strong>
+                  <span>{t.stats.years}</span>
+                </div>
+                <div>
+                  <strong>15+</strong>
+                  <span>{t.stats.karate}</span>
+                </div>
+                <div>
+                  <strong>5+</strong>
+                  <span>{t.stats.camps}</span>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div className="scroll-cue">
+          <span>{t.hero.scrollCue}</span>
+          <i />
         </div>
       </section>
 
-      {/* ── MARQUEE ── */}
-      <div
-        className="overflow-hidden py-4 mt-12"
-        style={{
-          borderTop: "1px solid var(--border)",
-          borderBottom: "1px solid var(--border)",
-          backgroundColor: "var(--primary)",
-        }}
-      >
-        <div className="marquee-track">
-          {ticker.map((item, i) => (
-            <span
-              key={i}
-              className="mx-6 text-sm uppercase font-semibold tracking-widest whitespace-nowrap"
-              style={{
-                fontFamily: "var(--font-mono)",
-                color: "var(--primary-foreground)",
-              }}
-            >
-              {item} <span className="mx-3 opacity-40">✦</span>
+      <div className="ticker" aria-label="Skills and highlights">
+        <div className="ticker-track">
+          {ticker.map((item, index) => (
+            <span key={`${item}-${index}`}>
+              {item} <b>✳</b>
             </span>
           ))}
         </div>
       </div>
 
-      {/* ── STATS ── */}
-      <section aria-label="Statistics" className="px-6 md:px-12 py-16 grid grid-cols-2 md:grid-cols-4" style={{ borderBottom: "1px solid var(--border)" }}>
-        {STATS.map((s, i) => (
-          <div
-            key={s.key}
-            className="py-8 px-4 text-center"
-            style={{
-              borderRight:
-                i < STATS.length - 1 ? "1px solid var(--border)" : "none",
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(2.2rem,4.5vw,3.8rem)",
-                fontWeight: 900,
-                color: "var(--primary)",
-                lineHeight: 1,
-              }}
-            >
-              {s.value}
-            </p>
-            <p
-              className="mt-2 text-xs uppercase tracking-widest"
-              style={{
-                fontFamily: "var(--font-mono)",
-                color: "var(--muted-foreground)",
-              }}
-            >
-              {t.stats[s.key as keyof typeof t.stats]}
-            </p>
+      <section className="stats content-width" aria-label="Quick facts">
+        {STATS.map((stat) => (
+          <div className="stat reveal" key={stat.key}>
+            <strong>{stat.value}</strong>
+            <span>{t.stats[stat.key as keyof typeof t.stats]}</span>
           </div>
         ))}
       </section>
 
-      {/* ── ABOUT ── */}
-      <section id="about" aria-label="About me" className="px-6 md:px-12 py-24" style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="flex items-baseline gap-4 mb-12">
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 12,
-              color: "var(--muted-foreground)",
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-            }}
-          >
-            00 —
-          </span>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(2rem,4vw,3.5rem)",
-              fontWeight: 700,
-            }}
-          >
-            {t.about.section}
-          </h2>
+      <section className="section content-width" id="about">
+        <SectionTitle number="01" eyebrow={t.about.section}>
+          {t.about.title1}
+          <br />
+          <em>{t.about.title2}</em>
+        </SectionTitle>
+
+        <div className="story-opening reveal">
+          <p className="story-opening-index">{t.about.storyOpening.index}</p>
+          <div>
+            <p>{t.about.storyOpening.p1}</p>
+            <p>{t.about.storyOpening.p2}</p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* bio */}
-          <div className="bento-card md:col-span-2 p-8 rounded-sm">
-            <p
-              className="text-base leading-loose mb-4"
-              style={{
-                color: "var(--muted-foreground)",
-                fontWeight: 300,
-                fontSize: 17,
-              }}
-            >
-              {t.about.bio1}
-            </p>
-            <p
-              className="text-base leading-loose"
-              style={{
-                color: "var(--muted-foreground)",
-                fontWeight: 300,
-                fontSize: 17,
-              }}
-            >
-              {t.about.bio2}
-            </p>
+        <div className="story-flow">
+          <div className="story-line" aria-hidden="true">
+            <span />
           </div>
-
-          {/* education card */}
-          <div className="bento-card p-8 rounded-sm flex flex-col justify-between overflow-hidden relative">
-            <div className="absolute -right-2 -top-2 text-[5.5rem] leading-none select-none pointer-events-none opacity-10">
-              🎓
-            </div>
-            <div>
-              <p
-                className="text-xs uppercase tracking-widest mb-3"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  color: "var(--muted-foreground)",
-                }}
-              >
-                {t.about.education}
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1.6rem",
-                  fontWeight: 700,
-                  lineHeight: 1.1,
-                }}
-              >
-                MSc Eng.
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1rem",
-                  fontWeight: 300,
-                  fontStyle: "italic",
-                  color: "var(--muted-foreground)",
-                  marginTop: 4,
-                }}
-              >
-                {t.about.cs}
-              </p>
-            </div>
-            <div className="mt-6 flex flex-col gap-1.5">
-              <div className="flex items-center gap-2">
-                <span
-                  style={{
-                    color: "var(--primary)",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 12,
-                  }}
-                >
-                  →
-                </span>
-                <span
-                  className="text-sm"
-                  style={{ color: "var(--muted-foreground)", fontWeight: 300 }}
-                >
-                  {t.about.faculty}
+          {t.about.journey.map((chapter, index) => (
+            <article
+              className={`story-chapter story-${chapter.tone} reveal`}
+              key={chapter.number}
+            >
+              <div className="story-visual">
+                <img src={chapter.image} alt={chapter.alt} loading="lazy" />
+                <div className="story-image-wash" />
+                <span className="story-ghost-number">{chapter.number}</span>
+                <span className="story-photo-label">
+                  {t.about.chapter} {chapter.number} / {chapter.overline}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <span
-                  style={{
-                    color: "var(--primary)",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 12,
-                  }}
-                >
-                  →
-                </span>
-                <span
-                  className="text-sm"
-                  style={{ color: "var(--muted-foreground)", fontWeight: 300 }}
-                >
-                  {t.about.track}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span
-                  style={{
-                    color: "var(--primary)",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 12,
-                  }}
-                >
-                  →
-                </span>
-                <span
-                  className="text-sm"
-                  style={{ color: "var(--muted-foreground)", fontWeight: 300 }}
-                >
-                  {t.about.thesis}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* open to work */}
-          <div
-            className="bento-card p-8 rounded-sm flex flex-col gap-3"
-            style={{ backgroundColor: "var(--primary)" }}
-          >
-            <span
-              className="inline-block w-3 h-3 rounded-full"
-              style={{ backgroundColor: "var(--primary-foreground)" }}
-            />
-            <p
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "1.5rem",
-                fontWeight: 700,
-                color: "var(--primary-foreground)",
-              }}
-            >
-              {t.about.openToWork}
-            </p>
-            <p
-              className="text-sm"
-              style={{ color: "rgba(9,9,9,0.6)", whiteSpace: "pre-line" }}
-            >
-              {t.about.roles}
-            </p>
-          </div>
-
-          {/* hobbies card */}
-          <div className="bento-card p-8 rounded-sm flex flex-col gap-4">
-            <p
-              className="text-xs uppercase tracking-widest"
-              style={{
-                fontFamily: "var(--font-mono)",
-                color: "var(--muted-foreground)",
-              }}
-            >
-              {t.about.notCoding}
-            </p>
-            {HOBBIES.slice(0, 4).map((h) => (
-              <div key={h.label.en} className="flex items-start gap-3">
-                <span style={{ fontSize: 16 }}>{h.emoji}</span>
-                <div>
-                  <p
-                    className="text-sm font-medium"
-                    style={{ lineHeight: 1.3 }}
-                  >
-                    {h.label[lang]}
-                  </p>
-                  <p
-                    className="text-xs"
-                    style={{
-                      color: "var(--muted-foreground)",
-                      fontWeight: 300,
-                    }}
-                  >
-                    {h.note[lang]}
-                  </p>
+              <div className="story-copy">
+                <div className="story-pin" aria-hidden="true">
+                  <span>{chapter.number}</span>
                 </div>
+                <span className="story-overline">{chapter.overline}</span>
+                <h3>{chapter.title}</h3>
+                <strong>{chapter.lead}</strong>
+                <p>{chapter.body}</p>
+                <span className="story-lesson">{chapter.lesson}</span>
               </div>
-            ))}
-          </div>
+              <span className="story-side-word" aria-hidden="true">
+                {index === 0 ? "BUILD" : index === 1 ? "PERSIST" : "CONNECT"}
+              </span>
+            </article>
+          ))}
 
-          {/* location */}
-          <div className="bento-card p-8 rounded-sm flex flex-col justify-between">
-            <p
-              className="text-xs uppercase tracking-widest"
-              style={{
-                fontFamily: "var(--font-mono)",
-                color: "var(--muted-foreground)",
-              }}
-            >
-              {t.about.basedIn}
-            </p>
+          <article className="story-finale reveal">
+            <span className="finale-number">{t.about.finale.number}</span>
             <div>
-              <p
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "2rem",
-                  fontWeight: 700,
-                }}
-              >
-                Poland 🇵🇱
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1.2rem",
-                  fontWeight: 300,
-                  fontStyle: "italic",
-                  color: "var(--muted-foreground)",
-                  marginTop: 4,
-                }}
-              >
-                {t.about.relocation}
-              </p>
+              <span className="story-overline">{t.about.finale.overline}</span>
+              <h3>
+                {t.about.finale.title1}
+                <br />
+                {t.about.finale.title2}
+                <br />
+                <em>{t.about.finale.title3}</em>
+              </h3>
             </div>
-            <p
-              className="text-sm"
-              style={{ color: "var(--muted-foreground)", fontWeight: 300 }}
-            >
-              {t.about.languages}
-            </p>
-          </div>
+            <div className="finale-copy">
+              <p>{t.about.finale.paragraph}</p>
+              <a href="#projects">
+                {t.about.finale.cta} <ArrowIcon />
+              </a>
+            </div>
+            <div className="finale-orbit" aria-hidden="true">
+              <span>?</span>
+            </div>
+          </article>
         </div>
       </section>
 
-      {/* ── WORK EXPERIENCE ── */}
-      <section
-        id="experience"
-        aria-label="Work experience"
-        className="px-6 md:px-12 py-24"
-        style={{ borderBottom: "1px solid var(--border)" }}
-      >
-        <div className="flex items-baseline gap-4 mb-12">
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 12,
-              color: "var(--muted-foreground)",
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-            }}
-          >
-            00.5 —
-          </span>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(2rem,4vw,3.5rem)",
-              fontWeight: 700,
-            }}
-          >
-            {t.about.experience}
-          </h2>
-        </div>
+      <section className="section content-width" id="experience">
+        <SectionTitle number="02" eyebrow={t.about.experience}>
+          {t.about.experienceTitle1}
+          <br />
+          <em>{t.about.experienceTitle2}</em>
+        </SectionTitle>
 
-        <div className="flex flex-col gap-6 max-w-3xl">
-          <div className="bento-card p-8 rounded-sm">
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <p
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1.3rem",
-                  fontWeight: 700,
-                }}
-              >
-                {t.about.exp1Title}
-              </p>
-              <span
-                className="text-xs px-3 py-1"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  border: "1px solid var(--border)",
-                  color: "var(--muted-foreground)",
-                }}
-              >
-                {t.about.exp1Date}
-              </span>
+        <div className="bento experience-list">
+          {experiences.map((exp) => (
+            <div className="experience-row" key={exp.num}>
+              <span>{exp.num}</span>
+              <div>
+                <h3>{exp.title}</h3>
+                <span className="exp-company">{exp.company}</span>
+                <p>{exp.desc}</p>
+              </div>
+              <strong>{exp.date}</strong>
             </div>
-            <p
-              className="text-sm mb-4"
-              style={{
-                color: "var(--primary)",
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              {t.about.exp1Company}
-            </p>
-            <p
-              className="text-sm leading-relaxed"
-              style={{ color: "var(--muted-foreground)", fontWeight: 300 }}
-            >
-              {t.about.exp1Desc}
-            </p>
-          </div>
-
-          <div className="bento-card p-8 rounded-sm">
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <p
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1.3rem",
-                  fontWeight: 700,
-                }}
-              >
-                {t.about.exp2Title}
-              </p>
-              <span
-                className="text-xs px-3 py-1"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  border: "1px solid var(--border)",
-                  color: "var(--muted-foreground)",
-                }}
-              >
-                {t.about.exp2Date}
-              </span>
-            </div>
-            <p
-              className="text-sm mb-4"
-              style={{
-                color: "var(--primary)",
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              {t.about.exp2Company}
-            </p>
-            <p
-              className="text-sm leading-relaxed"
-              style={{ color: "var(--muted-foreground)", fontWeight: 300 }}
-            >
-              {t.about.exp2Desc}
-            </p>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* ── PROJECTS ── */}
-      <section id="projects" aria-label="Projects" className="px-6 md:px-12 py-24" style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="flex flex-wrap items-baseline justify-between gap-4 mb-12">
-          <div className="flex items-baseline gap-4">
-            <span
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 12,
-                color: "var(--muted-foreground)",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-              }}
+      <section className="section projects-section" id="projects">
+        <div className="content-width">
+          <div className="projects-top">
+            <SectionTitle number="03" eyebrow={t.projects.section}>
+              {t.projects.title1}
+              <br />
+              <em>{t.projects.title2}</em>
+            </SectionTitle>
+            <button
+              className="filter-button"
+              onClick={() => setShowAll((current) => !current)}
+              type="button"
             >
-              01 —
-            </span>
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(2rem,4vw,3.5rem)",
-                fontWeight: 700,
-              }}
-            >
-              {t.projects.section}
-            </h2>
+              {showAll ? t.projects.featured : t.projects.all}
+              <span>{showAll ? "−" : "+"}</span>
+            </button>
           </div>
-          <div className="flex gap-2">
-            {(["projects", "all"] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className="text-xs px-4 py-2 uppercase tracking-widest transition-all duration-150"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  backgroundColor:
-                    activeTab === tab ? "var(--primary)" : "var(--card)",
-                  color:
-                    activeTab === tab
-                      ? "var(--primary-foreground)"
-                      : "var(--muted-foreground)",
-                  border: "1px solid var(--border)",
-                  cursor: "pointer",
-                }}
+
+          <div className="projects-grid">
+            {visibleProjects.map((project, index) => (
+              <article
+                className={`project-card project-${project.tone} reveal`}
+                key={project.num}
               >
-                {tab === "projects" ? t.projects.featured : t.projects.all}
-              </button>
+                <div className="project-meta">
+                  <span>{t.projects.items[index].tag}</span>
+                  <span>{project.year}</span>
+                </div>
+                <div className="project-number">{project.num}</div>
+                <h3>{project.title}</h3>
+                <p>{t.projects.items[index].desc}</p>
+                <div className="project-footer">
+                  <div>
+                    {project.stack.map((item) => (
+                      <span key={item}>{item}</span>
+                    ))}
+                  </div>
+                  <div className="project-links">
+                    <a
+                      className="project-link"
+                      href={t.projects.items[index].demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Demo →
+                    </a>
+                    <a
+                      className="project-link"
+                      href={t.projects.items[index].code}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Code →
+                    </a>
+                  </div>
+                  <a
+                    className="project-arrow"
+                    href={t.projects.items[index].demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Demo — ${project.title}`}
+                  >
+                    <ArrowIcon />
+                  </a>
+                </div>
+              </article>
             ))}
           </div>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {visibleProjects.map((p, i) => (
-            <div
-              key={p.num}
-              className="project-card bento-card p-8 rounded-sm flex flex-col gap-4 cursor-default"
-            >
-              <div className="flex items-center justify-between">
-                <span
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 12,
-                    color: "var(--muted-foreground)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                  }}
-                >
-                  {t.projects.items[i].tag}
-                </span>
-                <span
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 12,
-                    color: "var(--muted-foreground)",
-                  }}
-                >
-                  {p.year}
-                </span>
-              </div>
-              <div>
-                <p
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 13,
-                    color: p.accent,
-                    marginBottom: 4,
-                  }}
-                >
-                  {p.num}
-                </p>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "2rem",
-                    fontWeight: 700,
-                    lineHeight: 1.1,
-                  }}
-                >
-                  {p.title}
-                </h3>
-              </div>
-              <p
-                className="flex-1 text-sm leading-relaxed"
-                style={{ color: "var(--muted-foreground)", fontWeight: 300 }}
-              >
-                {t.projects.items[i].desc}
-              </p>
-              <div className="flex flex-wrap gap-3 mt-auto">
-                <a
-                  href={t.projects.items[i].demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs px-3 py-1.5 transition-all duration-200"
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    backgroundColor: "var(--primary)",
-                    color: "var(--primary-foreground)",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.82")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                >
-                  Demo →
-                </a>
-                <a
-                  href={t.projects.items[i].code}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs px-3 py-1.5 transition-all duration-200"
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    border: "1px solid var(--border)",
-                    color: "var(--muted-foreground)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "var(--primary)";
-                    e.currentTarget.style.color = "var(--primary)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border)";
-                    e.currentTarget.style.color = "var(--muted-foreground)";
-                  }}
-                >
-                  Code →
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
       </section>
 
-      {/* ── SKILLS ── */}
-      <section id="skills" aria-label="Skills" className="px-6 md:px-12 py-24" style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="flex items-baseline gap-4 mb-12">
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 12,
-              color: "var(--muted-foreground)",
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-            }}
-          >
-            02 —
-          </span>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(2rem,4vw,3.5rem)",
-              fontWeight: 700,
-            }}
-          >
-            {t.skills.section}
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {t.skills.groups.map((group, gi) => (
-            <div key={group}>
-              <p
-                className="text-xs uppercase tracking-widest mb-5"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  color: "var(--primary)",
-                }}
-              >
-                {group}
-              </p>
-              <div className="flex flex-col gap-2">
-                {t.skills.groupItems[gi].map((item) => (
-                  <span
-                    key={item}
-                    className="skill-pill px-4 py-2.5 text-sm"
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      border: "1px solid var(--border)",
-                      color: "var(--muted-foreground)",
-                      backgroundColor: "var(--card)",
-                      display: "block",
-                    }}
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
+      <section className="section content-width" id="skills">
+        <SectionTitle number="04" eyebrow={t.skills.section}>
+          {t.skills.title1}
+          <br />
+          <em>{t.skills.title2}</em>
+        </SectionTitle>
+
+        <div className="skills-layout">
+          <div className="skills-intro reveal">
+            <span>{t.skills.introEyebrow}</span>
+            <p>{t.skills.introText}</p>
+            <strong>{t.skills.introStrong}</strong>
+          </div>
+
+          <div>
+            <div className="skills-grid">
+              {t.skills.groups.map((group, groupIndex) => (
+                <article className="skill-group reveal" key={group}>
+                  <div>
+                    <span>0{groupIndex + 1}</span>
+                    <h3>{group}</h3>
+                  </div>
+                  <ul>
+                    {t.skills.groupItems[groupIndex].map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* other tools */}
-        <div className="mt-8 flex flex-wrap gap-3">
-          <p
-            className="text-xs uppercase tracking-widest self-center mr-2"
-            style={{ fontFamily: "var(--font-mono)", color: "var(--primary)" }}
-          >
-            {t.skills.other}:
-          </p>
-          {t.skills.otherItems.map((item) => (
-            <span
-              key={item}
-              className="skill-pill px-4 py-2 text-sm"
-              style={{
-                fontFamily: "var(--font-mono)",
-                border: "1px solid var(--border)",
-                color: "var(--muted-foreground)",
-                backgroundColor: "var(--card)",
-              }}
-            >
-              {item}
-            </span>
-          ))}
-        </div>
+            <div className="other-tools">
+              <span className="other-tools-label">{t.skills.other}:</span>
+              {t.skills.otherItems.map((item) => (
+                <span className="tool-chip" key={item}>
+                  {item}
+                </span>
+              ))}
+            </div>
 
-        {/* soft skills note */}
-        <div className="mt-12 p-6 bento-card rounded-sm grid md:grid-cols-3 gap-6">
-          <div>
-            <p
-              className="text-xs uppercase tracking-widest mb-3"
-              style={{
-                fontFamily: "var(--font-mono)",
-                color: "var(--primary)",
-              }}
-            >
-              {t.skills.communication}
-            </p>
-            <p
-              className="text-sm leading-relaxed"
-              style={{ color: "var(--muted-foreground)", fontWeight: 300 }}
-            >
-              {t.skills.communicationDesc}
-            </p>
-          </div>
-          <div>
-            <p
-              className="text-xs uppercase tracking-widest mb-3"
-              style={{
-                fontFamily: "var(--font-mono)",
-                color: "var(--primary)",
-              }}
-            >
-              {t.skills.leadership}
-            </p>
-            <p
-              className="text-sm leading-relaxed"
-              style={{ color: "var(--muted-foreground)", fontWeight: 300 }}
-            >
-              {t.skills.leadershipDesc}
-            </p>
-          </div>
-          <div>
-            <p
-              className="text-xs uppercase tracking-widest mb-3"
-              style={{
-                fontFamily: "var(--font-mono)",
-                color: "var(--primary)",
-              }}
-            >
-              {t.skills.discipline}
-            </p>
-            <p
-              className="text-sm leading-relaxed"
-              style={{ color: "var(--muted-foreground)", fontWeight: 300 }}
-            >
-              {t.skills.disciplineDesc}
-            </p>
+            <div className="soft-skills">
+              {softSkills.map((block) => (
+                <div className="soft-block reveal" key={block.label}>
+                  <span>{block.label}</span>
+                  <p>{block.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── CONTACT ── */}
-      <section
-        id="contact"
-        aria-label="Get in touch"
-        className="px-6 md:px-12 py-28 relative overflow-hidden"
-      >
-        <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none">
-          <p
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(5rem,17vw,15rem)",
-              fontWeight: 900,
-              color: "rgba(212,255,30,0.04)",
-              lineHeight: 1,
-              whiteSpace: "nowrap",
-            }}
-          >
-            {t.contact.ghostText}
-          </p>
-        </div>
-        <div className="relative z-10 max-w-3xl">
-          <div className="flex items-baseline gap-4 mb-8">
-            <span
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 12,
-                color: "var(--muted-foreground)",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-              }}
-            >
-              03 —
-            </span>
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(2rem,4vw,3.5rem)",
-                fontWeight: 700,
-              }}
-            >
-              {t.contact.section}
-            </h2>
-          </div>
-<h2
-             style={{
-               fontFamily: "var(--font-display)",
-               fontSize: "clamp(2.5rem,6vw,5.5rem)",
-               fontWeight: 900,
-               lineHeight: 0.95,
-               letterSpacing: "-0.02em",
-             }}
-           >
+      <section className="contact-section" id="contact">
+        <div className="contact-orb" aria-hidden="true" />
+        <div className="content-width contact-inner">
+          <span className="contact-kicker reveal">{t.contact.section}</span>
+          <h2 className="reveal">
             {t.contact.title1}
             <br />
-            <em className="not-italic" style={{ color: "var(--primary)" }}>
-              {t.contact.title2}
-            </em>
-</h2>
-           <p
-             className="mt-8 mb-10 max-w-md"
-             style={{
-               fontSize: 16,
-               lineHeight: 1.75,
-               color: "var(--muted-foreground)",
-               fontWeight: 300,
-             }}
-           >
-             {t.contact.desc}
-           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button
-              onClick={copyEmail}
-              className="px-8 py-4 text-sm uppercase tracking-widest font-medium transition-opacity duration-200"
-              style={{
-                backgroundColor: "var(--primary)",
-                color: "var(--primary-foreground)",
-                fontFamily: "var(--font-mono)",
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.82")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-            >
-              {copiedEmail ? t.contact.copied : "awzorek23@gmail.com"}
+            <em>{t.contact.title2}</em>
+          </h2>
+          <p className="reveal">{t.contact.desc}</p>
+          <div className="contact-actions reveal">
+            <button className="email-button" onClick={copyEmail} type="button">
+              <span>{copiedEmail ? t.contact.copied : EMAIL}</span>
+              <ArrowIcon />
             </button>
-            <a
-              href="https://github.com/Aszlaczek"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 text-sm uppercase tracking-widest transition-all duration-200 text-center"
-              style={{
-                border: "1px solid var(--border)",
-                color: "var(--muted-foreground)",
-                fontFamily: "var(--font-mono)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--primary)";
-                e.currentTarget.style.color = "var(--primary)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.color = "var(--muted-foreground)";
-              }}
-            >
-              {t.contact.github}
-            </a>
-            <a
-              href="https://www.linkedin.com/in/adrian-wzorek-902572309/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 text-sm uppercase tracking-widest transition-all duration-200 text-center"
-              style={{
-                border: "1px solid var(--border)",
-                color: "var(--muted-foreground)",
-                fontFamily: "var(--font-mono)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--primary)";
-                e.currentTarget.style.color = "var(--primary)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.color = "var(--muted-foreground)";
-              }}
-            >
-              {t.contact.linkedin}
-            </a>
+            <div className="social-links">
+              <a
+                href="https://github.com/Aszlaczek"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.contact.github} <ArrowIcon />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/adrian-wzorek-902572309/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.contact.linkedin} <ArrowIcon />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer
-        className="px-6 md:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4"
-        style={{ borderTop: "1px solid var(--border)" }}
-      >
-        <p
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 12,
-            color: "var(--muted-foreground)",
-          }}
-        >
-          {t.footer.copyright}
-        </p>
-        <p
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 12,
-            color: "var(--muted-foreground)",
-          }}
-        >
+      <footer className="footer content-width">
+        <p>{t.footer.copyright}</p>
+        <p>
           {t.footer.tagline}
-          <span style={{ color: "var(--primary)" }}>
-            {t.footer.alwaysShipping}
-          </span>
+          <span>{t.footer.alwaysShipping}</span>
         </p>
       </footer>
-    </div>
+    </main>
   );
 }

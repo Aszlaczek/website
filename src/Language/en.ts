@@ -7,6 +7,8 @@ export const en = {
     skills: "skills",
     contact: "contact",
     hireMe: "Hire me",
+    menu: "Menu",
+    closeMenu: "Close menu",
   },
   hero: {
     openToWork: "Open to work · Full Stack Developer",
@@ -21,6 +23,9 @@ export const en = {
     campLead: "Camp\nCounselor",
     travelGuide: "5+ years\nTeaching",
     ghostText: "DEV + SENSEI",
+    chapterLabel: "A story about curiosity,\ndiscipline & people",
+    scrollCue: "Scroll to discover",
+    values: ["01 / Solve", "02 / Persist", "03 / Connect"],
   },
   stats: {
     years: "Years coding",
@@ -29,21 +34,73 @@ export const en = {
     camps: "Years instructing",
   },
   about: {
-    section: "About me",
-    bio1: "I'm Adrian — a software engineer with a Master's degree in Computer Science (Uniwersytet Warmińsko-Mazurski). I build web applications with React/Next.js and Node.js, and on the backend I also work with Python (FastAPI/Django).",
-    bio2: "I gained professional experience in IT systems administration and process automation in a production environment. Outside of work, I've been a karate instructor and camp counselor for over 5 years, which taught me how to perform under pressure and stay disciplined.",
-    education: "Education",
-    cs: "Computer Science",
-    faculty: "Uniwersytet Warmińsko-Mazurski",
-    track: "Engineering of IT Systems",
-    thesis: "Specialization: Designing IT Systems & Computer Networks",
+    section: "Beyond the code",
+    title1: "Not a straight line.",
+    title2: "A story in motion.",
     openToWork: "Open to work",
-    roles: "Junior / mid full-stack roles\nRemote or on-site · Poland & abroad",
-    notCoding: "When I'm not coding",
-    basedIn: "Based in",
     relocation: "Open to relocation",
-    languages: "Polish (Native) · English (B2)",
+    chapter: "Chapter",
+    storyOpening: {
+      index: "00 / PROLOGUE",
+      p1: "I'm not only a developer, an instructor or a camp leader.",
+      p2: "I'm the sum of every problem I stayed with, every person I helped grow and every plan I had to reinvent along the way.",
+    },
+    journey: [
+      {
+        number: "01",
+        overline: "The spark",
+        title: "It started with a problem.",
+        lead: "Then another. And suddenly, I was building.",
+        body: "Computer Science gave that curiosity a language. Code became my way of taking something tangled, finding the pattern inside it and turning it into a useful product. Every solved problem made me hungry for a harder one.",
+        lesson: "Curiosity → craft",
+        image:
+          "https://images.unsplash.com/photo-1650661926447-9efb2610f64c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        alt: "Laptop on a developer's desk",
+        tone: "code",
+      },
+      {
+        number: "02",
+        overline: "The discipline",
+        title: "Progress is repetition.",
+        lead: "Fifteen years on the mat made that real.",
+        body: "Karate taught me that confidence is built quietly: one technique, one mistake and one better attempt at a time. As an active instructor, I also learned to explain difficult things simply and notice when someone needs a push — or a little patience.",
+        lesson: "Discipline → leadership",
+        image:
+          "https://images.unsplash.com/photo-1656653121475-e33829581294?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        alt: "Martial artist tightening a black belt",
+        tone: "dojo",
+      },
+      {
+        number: "03",
+        overline: "The people",
+        title: "Plans change. People count.",
+        lead: "Camps turned responsibility into an adventure.",
+        body: "Trips, summer camps and groups of young people rarely follow the perfect plan. They taught me to organize the chaos, communicate with energy and stay calm when reality ships an unexpected feature. The best outcome is always something we create together.",
+        lesson: "Responsibility → trust",
+        image:
+          "https://images.unsplash.com/photo-1634206813008-d1c2b828c7fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        alt: "Campfire beside a forest lake",
+        tone: "camp",
+      },
+    ],
+    finale: {
+      number: "04",
+      overline: "The next chapter",
+      title1: "Still learning.",
+      title2: "Still moving.",
+      title3: "Ready for more.",
+      paragraph:
+        "These paths didn't distract me from becoming a developer. They shaped the kind of developer I want to be: resourceful, dependable, open to feedback and genuinely good to work with.",
+      cta: "See what that looks like in code",
+    },
+    profileCard: {
+      kicker: "Three paths. One mindset.",
+      paragraph:
+        "Building products, teaching discipline and creating adventures people remember.",
+    },
     experience: "Work experience",
+    experienceTitle1: "From thesis",
+    experienceTitle2: "to production.",
     exp1Title: "IT Specialist",
     exp1Company: "District Office in Lidzbark Warmiński",
     exp1Date: "Sep 2025 – Sep 2026",
@@ -54,7 +111,9 @@ export const en = {
     exp2Desc: "Utilized PrestaShop CMS to update and redesign the entire website architecture. Increased website traffic by 25% through structural and content improvements.",
   },
   projects: {
-    section: "Projects",
+    section: "Selected work",
+    title1: "Projects with",
+    title2: "purpose.",
     featured: "Featured",
     all: "All",
     items: [
@@ -92,6 +151,13 @@ export const en = {
   },
   skills: {
     section: "Tech stack",
+    title1: "Skills &",
+    title2: "foundations.",
+    introEyebrow: "How I choose tools",
+    introText:
+      "I care more about solving the right problem than chasing every new framework.",
+    introStrong:
+      "Strong fundamentals first. The right technology second. Learning never stops.",
     groups: ["Languages", "Frontend", "Backend", "Database"],
     groupItems: [
       ["JavaScript", "TypeScript", "Python", "PHP"],

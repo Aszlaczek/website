@@ -5,3 +5,4 @@ dist/
 *.docx
 *.md
 .*
+agents/

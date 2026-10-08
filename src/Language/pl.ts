@@ -7,6 +7,8 @@ export const pl: typeof en = {
     skills: "umiejętności",
     contact: "kontakt",
     hireMe: "Zatrudnij mnie",
+    menu: "Menu",
+    closeMenu: "Zamknij menu",
   },
   hero: {
     openToWork: "Szukam pracy · Full Stack Developer",
@@ -21,6 +23,9 @@ export const pl: typeof en = {
     campLead: "Wychowawca\nObozowy",
     travelGuide: "5+ lat\nnauczania",
     ghostText: "DEV + SENSEI",
+    chapterLabel: "Historia o ciekawości,\ndyscyplinie i ludziach",
+    scrollCue: "Przewiń, aby odkryć",
+    values: ["01 / Rozwiązuj", "02 / Wytrwaj", "03 / Łącz"],
   },
   stats: {
     years: "Lat kodowania",
@@ -29,21 +34,73 @@ export const pl: typeof en = {
     camps: "Lat nauczania",
   },
   about: {
-    section: "O mnie",
-    bio1: "Jestem Adrian — programista z tytułem magistra informatyki (Uniwersytet Warmińsko-Mazurski). Buduję aplikacje webowe w React/Next.js i Node.js, a backendowo pracuję też w Pythonie (FastAPI/Django).",
-    bio2: "Zdobyłem doświadczenie w administracji systemami IT i automatyzacji procesów w środowisku produkcyjnym. Poza kodowaniem od ponad 5 lat jestem instruktorem karate i wychowawcą obozowym — to nauczyło mnie pracować pod presją i być konsekwentnym.",
-    education: "Wykształcenie",
-    cs: "Informatyka",
-    faculty: "Uniwersytet Warmińsko-Mazurski",
-    track: "Inżynieria Systemów Informatycznych",
-    thesis: "Specjalizacja: Projektowanie systemów IT i sieci komputerowych",
+    section: "Poza kodem",
+    title1: "To nie prosta ścieżka.",
+    title2: "Historia w ruchu.",
     openToWork: "Szukam pracy",
-    roles: "Stanowiska junior / mid full-stack\nZdalnie lub stacjonarnie · Polska i zagranica",
-    notCoding: "Poza kodowaniem",
-    basedIn: "Mieszkam w",
     relocation: "Otwarty na przeprowadzkę",
-    languages: "Polski (ojczysty) · Angielski (B2)",
+    chapter: "Rozdział",
+    storyOpening: {
+      index: "00 / PROLOG",
+      p1: "Nie jestem tylko programistą, instruktorem ani opiekunem na obozie.",
+      p2: "Jestem sumą każdego problemu, przy którym wytrwałem, każdej osoby, którą pomogłem rozwinąć i każdego planu, który po drodze musiałem wymyślić od nowa.",
+    },
+    journey: [
+      {
+        number: "01",
+        overline: "Iskra",
+        title: "Zaczęło się od problemu.",
+        lead: "Potem od kolejnego. I nagle budowałem.",
+        body: "Informatyka dała tej ciekawości język. Kod stał się moim sposobem, by w gąszczu znaleźć wzorzec i zamienić go w użyteczny produkt. Każdy rozwiązany problem sprawiał, że chciałem kolejnego — trudniejszego.",
+        lesson: "Ciekawość → rzemiosło",
+        image:
+          "https://images.unsplash.com/photo-1650661926447-9efb2610f64c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        alt: "Laptop na biurku developera",
+        tone: "code",
+      },
+      {
+        number: "02",
+        overline: "Dyscyplina",
+        title: "Postęp to powtarzanie.",
+        lead: "Piętnaście lat na macie to uświadomiło.",
+        body: "Karate nauczyło mnie, że pewność buduje się po cichu: jedna technika, jeden błąd i jedna lepsza próba na raz. Jako aktywny instruktor nauczyłem się też prosto wyjaśniać trudne rzeczy i dostrzegać, kiedy ktoś potrzebuje wsparcia — albo odrobinę cierpliwości.",
+        lesson: "Dyscyplina → przywództwo",
+        image:
+          "https://images.unsplash.com/photo-1656653121475-e33829581294?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        alt: "Artysta walki zapinający czarny pas",
+        tone: "dojo",
+      },
+      {
+        number: "03",
+        overline: "Ludzie",
+        title: "Plany się zmieniają. Liczą się ludzie.",
+        lead: "Obozy zamieniły odpowiedzialność w przygodę.",
+        body: "Wycieczki, obozy i grupy młodych ludzi rzadko podążają za idealnym planem. Nauczyły mnie organizować chaos, komunikować się z energią i zachowywać spokój, gdy rzeczywistość wdraża niespodziewaną funkcję. Najlepszy efekt to zawsze coś, co tworzymy razem.",
+        lesson: "Odpowiedzialność → zaufanie",
+        image:
+          "https://images.unsplash.com/photo-1634206813008-d1c2b828c7fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        alt: "Ognisko przy leśnym jeziorze",
+        tone: "camp",
+      },
+    ],
+    finale: {
+      number: "04",
+      overline: "Następny rozdział",
+      title1: "Wciąż się uczę.",
+      title2: "Wciąż idę dalej.",
+      title3: "Gotowy na więcej.",
+      paragraph:
+        "Te ścieżki nie odwróciły mnie od programowania. Ukształtowały programistę, którym chcę być: zaradnym, niezawodnym, otwartym na uwagi i po prostu dobrym we współpracy.",
+      cta: "Zobacz, jak to wygląda w kodzie",
+    },
+    profileCard: {
+      kicker: "Trzy ścieżki. Jedna postawa.",
+      paragraph:
+        "Buduję produkty, uczę dyscypliny i tworzę przygody, które się pamięta.",
+    },
     experience: "Doświadczenie zawodowe",
+    experienceTitle1: "Od dyplomu",
+    experienceTitle2: "do produkcji.",
     exp1Title: "Informatyk",
     exp1Company: "Starostwo Powiatowe w Lidzbarku Warmińskim",
     exp1Date: "Wrz 2025 – Wrz 2026",
@@ -54,7 +111,9 @@ export const pl: typeof en = {
     exp2Desc: "Przy użyciu PrestaShop zaktualizowałem i przeprojektowałem całą architekturę strony. Zwiększyłem ruch o 25% dzięki ulepszeniom strukturalnym i treściowym.",
   },
   projects: {
-    section: "Projekty",
+    section: "Wybrane projekty",
+    title1: "Projekty z",
+    title2: "misją.",
     featured: "Wyróżnione",
     all: "Wszystkie",
     items: [
@@ -92,6 +151,13 @@ export const pl: typeof en = {
   },
   skills: {
     section: "Stack technologiczny",
+    title1: "Umiejętności",
+    title2: "i fundamenty.",
+    introEyebrow: "Jak wybieram narzędzia",
+    introText:
+      "Częściej zależy mi na rozwiązaniu właściwego problemu niż na gonieniu za każdym nowym frameworkiem.",
+    introStrong:
+      "Najpierw mocne fundamenty. Potem właściwa technologia. Nauka się nie kończy.",
     groups: ["Języki", "Frontend", "Backend", "Bazy danych"],
     groupItems: [
       ["JavaScript", "TypeScript", "Python", "PHP"],

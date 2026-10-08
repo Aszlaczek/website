@@ -2,10 +2,12 @@ import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import sharp from "sharp";
 
-const LIME = "#d4ff1e";
-const BG = "#090909";
-const CARD = "#141414";
-const MUTED = "#8a8a84";
+const LIME = "#d8ff57";
+const BG = "#0a0a0c";
+const CARD = "#121216";
+const MUTED = "#9a999f";
+const FG = "#f5f2ea";
+const LINE = "rgba(255,255,255,0.16)";
 
 function ogSvg() {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
@@ -13,11 +15,11 @@ function ogSvg() {
   <rect x="0" y="0" width="1200" height="6" fill="${LIME}"/>
 
   <g font-family="Helvetica, Arial, sans-serif">
-    <rect x="72" y="64" width="196" height="44" rx="4" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+    <rect x="72" y="64" width="196" height="44" rx="4" fill="none" stroke="${LINE}" stroke-width="2"/>
     <circle cx="98" cy="86" r="6" fill="${LIME}"/>
-    <text x="116" y="92" fill="#f0efe9" font-size="20" font-weight="500" letter-spacing="2">ADRIAN.DEV</text>
+    <text x="116" y="92" fill="${FG}" font-size="20" font-weight="500" letter-spacing="2">ADRIAN.DEV</text>
 
-    <text x="72" y="270" fill="#f0efe9" font-size="92" font-weight="700" letter-spacing="-2">Adrian Wzorek</text>
+    <text x="72" y="270" fill="${FG}" font-size="92" font-weight="700" letter-spacing="-2">Adrian Wzorek</text>
     <text x="72" y="348" fill="${LIME}" font-size="56" font-weight="700">Full Stack Developer</text>
 
     <text x="72" y="416" fill="#c9c9c2" font-size="30" font-weight="400">React &#183; Next.js &#183; Node.js &#183; Python</text>
@@ -25,8 +27,8 @@ function ogSvg() {
     <rect x="72" y="470" width="300" height="52" rx="4" fill="${LIME}"/>
     <text x="222" y="503" fill="${BG}" font-size="24" font-weight="700" text-anchor="middle" letter-spacing="1">OPEN TO WORK</text>
 
-    <rect x="392" y="470" width="360" height="52" rx="4" fill="${CARD}" stroke="#2a2a2a" stroke-width="2"/>
-    <text x="572" y="503" fill="#f0efe9" font-size="24" font-weight="500" text-anchor="middle">MSc Eng. &#183; Poland</text>
+    <rect x="392" y="470" width="360" height="52" rx="4" fill="${CARD}" stroke="${LINE}" stroke-width="2"/>
+    <text x="572" y="503" fill="${FG}" font-size="24" font-weight="500" text-anchor="middle">MSc Eng. &#183; Poland</text>
 
     <text x="72" y="590" fill="${MUTED}" font-size="22" font-weight="400">Portfolio &#183; React &#183; TypeScript &#183; Node.js &#183; FastAPI &#183; Django</text>
   </g>

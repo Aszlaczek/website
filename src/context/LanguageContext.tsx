@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  type ReactNode,
+} from "react";
 import { translations, type Lang, type Translations } from "../Language";
 
 interface LanguageCtx {
@@ -20,7 +26,8 @@ function getInitialLang(): Lang {
   } catch {
     /* localStorage unavailable (private mode / SSR) */
   }
-  if (typeof navigator !== "undefined" && navigator.language?.startsWith("pl")) return "pl";
+  if (typeof navigator !== "undefined" && navigator.language?.startsWith("pl"))
+    return "pl";
   return "en";
 }
 
@@ -31,7 +38,11 @@ function applyLang(lang: Lang, syncUrl: boolean) {
   } catch {
     /* ignore */
   }
-  if (syncUrl && typeof window !== "undefined" && window.history?.replaceState) {
+  if (
+    syncUrl &&
+    typeof window !== "undefined" &&
+    window.history?.replaceState
+  ) {
     const url = new URL(window.location.href);
     url.searchParams.set("lang", lang);
     window.history.replaceState(null, "", url);
