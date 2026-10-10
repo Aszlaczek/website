@@ -142,7 +142,8 @@
   background: var(--violet);
   transform: rotate(-2deg) scaleX(0);
   transform-origin: left;
-  animation: draw-line var(--duration-animation) 700ms var(--ease-fluent) forwards;
+  animation: draw-line var(--duration-animation) 700ms var(--ease-fluent)
+    forwards;
 }
 
 .hero-bottom {
@@ -364,12 +365,12 @@
 }
 
 .profile-stats > div {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto min-content;
   padding: 20px 11px 8px;
   border-right: 1px solid var(--line);
   align-items: center;
-  justify-content: end;
+  justify-items: center;
 }
 
 .profile-stats > div:first-child {
