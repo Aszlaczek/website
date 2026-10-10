@@ -12,7 +12,7 @@ export const en = {
     closeMenu: "Close menu",
   },
   hero: {
-    openToWork: "Open to work · Full Stack Developer",
+    openToWork: "Open to work · Junior Full Stack Developer",
     degree: "MSc Eng. in Computer Science · Poland",
     title1: "I build things",
     title2: "for the web.",
@@ -183,14 +183,14 @@ export const en = {
     ghostText: "LET'S BUILD",
     title1: "Looking for a",
     title2: "dev who delivers?",
-    desc: "I'm actively looking for a junior or mid-level web developer position. Open to full-time, hybrid, or remote roles. Let's talk — I respond faster than my kata routines.",
+    desc: "I'm actively looking for a junior-level web developer position. Open to full-time, hybrid, or remote roles. Let's talk — I respond faster than my kata routines.",
     copied: "✓ Copied!",
     github: "GitHub",
     linkedin: "LinkedIn",
   },
   footer: {
     copyright:
-      "© 2026 Adrian Wzorek — MSc Eng. · Full Stack Developer · Sensei",
+      "© 2026 Adrian Wzorek — MSc Eng. · Junior Full Stack Developer · Sensei",
     tagline: "Built from scratch · ",
     alwaysShipping: "Always shipping.",
   },

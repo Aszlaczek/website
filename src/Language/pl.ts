@@ -12,7 +12,7 @@ export const pl: typeof en = {
     closeMenu: "Zamknij menu",
   },
   hero: {
-    openToWork: "Szukam pracy · Full Stack Developer",
+    openToWork: "Szukam pracy · Junior Full Stack Developer",
     degree: "Magister inżynier informatyki · Polska",
     title1: "Buduję rzeczy",
     title2: "w sieci.",
@@ -183,14 +183,14 @@ export const pl: typeof en = {
     ghostText: "ZBUDUJMY COŚ",
     title1: "Szukasz",
     title2: "developera, który dostarcza?",
-    desc: "Aktywnie szukam pracy jako junior lub mid web developer. Otwarty na etat, hybryd lub zdalną. Porozmawiajmy — odpowiadam szybciej niż wykonuję kata.",
+    desc: "Aktywnie szukam pracy jako junior web developer. Otwarty na etat, hybryd lub zdalną. Porozmawiajmy — odpowiadam szybciej niż wykonuję kata.",
     copied: "✓ Skopiowano!",
     github: "GitHub",
     linkedin: "LinkedIn",
   },
   footer: {
     copyright:
-      "© 2026 Adrian Wzorek — MSc Eng. · Full Stack Developer · Sensei",
+      "© 2026 Adrian Wzorek — MSc Eng. · Junior Full Stack Developer · Sensei",
     tagline: "Zbudowane od zera · ",
     alwaysShipping: "Zawsze dostarczam.",
   },
