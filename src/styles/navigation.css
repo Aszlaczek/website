@@ -1,6 +1,6 @@
 .nav-wrap {
   position: fixed;
-  z-index: 50;
+  z-index: var(--z-fixed);
   top: 18px;
   left: 50%;
   width: min(calc(100% - 32px), 1240px);
@@ -10,8 +10,8 @@
   justify-content: space-between;
   min-height: 62px;
   padding: 0 12px 0 22px;
-  border: 1px solid var(--glass-border);
-  border-radius: 999px;
+  border: var(--border-width) solid var(--glass-border);
+  border-radius: var(--radius-full);
   background:
     linear-gradient(100deg, rgba(255, 255, 255, 0.08), transparent 35%),
     rgba(10, 10, 14, 0.58);
@@ -46,9 +46,9 @@
   position: relative;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--font-size-sm);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-normal);
   transition: color 180ms var(--ease-fluent);
 }
 
@@ -68,10 +68,10 @@
 .nav-cta {
   min-height: 42px;
   padding: 0 20px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   background: var(--foreground);
   color: var(--background);
-  font-size: 12px;
+  font-size: var(--font-size-md);
   font-weight: 700;
 }
 
@@ -83,8 +83,8 @@
   width: 17px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.7;
-  transition: transform 250ms var(--ease-fluent);
+  stroke-width: var(--stroke-width);
+  transition: transform var(--duration-normal) var(--ease-fluent);
 }
 
 .nav-cta:hover svg,
@@ -107,19 +107,19 @@
   justify-content: center;
   min-height: 42px;
   padding: 0 15px;
-  border: 1px solid var(--glass-border);
-  border-radius: 999px;
+  border: var(--border-width) solid var(--glass-border);
+  border-radius: var(--radius-full);
   background: var(--glass);
   color: var(--muted);
   backdrop-filter: blur(14px) saturate(130%);
   cursor: pointer;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--letter-spacing-normal);
   text-transform: uppercase;
   transition:
-    color 220ms var(--ease-fluent),
-    border-color 220ms var(--ease-fluent);
+    color var(--duration-fast) var(--ease-fluent),
+    border-color var(--duration-fast) var(--ease-fluent);
 }
 
 .nav-ghost:hover {
@@ -135,15 +135,15 @@
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid var(--glass-border);
-  border-radius: 999px;
+  border: var(--border-width) solid var(--glass-border);
+  border-radius: var(--radius-full);
   background: var(--glass);
   color: var(--foreground);
   backdrop-filter: blur(14px) saturate(130%);
   cursor: pointer;
   transition:
-    color 220ms var(--ease-fluent),
-    border-color 220ms var(--ease-fluent);
+    color var(--duration-fast) var(--ease-fluent),
+    border-color var(--duration-fast) var(--ease-fluent);
 }
 
 .nav-hamburger:hover {
@@ -168,7 +168,7 @@
 /* nav: mobile bottom sheet */
 .nav-sheet {
   position: fixed;
-  z-index: 90;
+  z-index: var(--z-modal);
   inset: 0;
   pointer-events: none;
   visibility: hidden;
@@ -226,8 +226,8 @@
 .nav-sheet-head > span {
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
 }
 
@@ -238,8 +238,8 @@
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid var(--glass-border);
-  border-radius: 999px;
+  border: var(--border-width) solid var(--glass-border);
+  border-radius: var(--radius-full);
   background: var(--glass);
   color: var(--foreground);
   cursor: pointer;
@@ -269,22 +269,22 @@
   justify-content: space-between;
   min-height: 56px;
   padding: 0 18px;
-  border: 1px solid var(--line);
+  border: var(--border-width) solid var(--line);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.04);
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: var(--font-size-md);
+  letter-spacing: var(--letter-spacing-normal);
   text-transform: uppercase;
   transition:
-    border-color 220ms var(--ease-fluent),
-    background 220ms var(--ease-fluent);
+    border-color var(--duration-fast) var(--ease-fluent),
+    background var(--duration-fast) var(--ease-fluent);
 }
 
 .nav-sheet-links a::after {
   content: "→";
   color: var(--muted);
-  transition: transform 250ms var(--ease-fluent);
+  transition: transform var(--duration-normal) var(--ease-fluent);
 }
 
 .nav-sheet-links a:hover {

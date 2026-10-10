@@ -17,8 +17,8 @@
   height: 65vw;
   top: -37vw;
   left: 4vw;
-  border: 1px solid rgba(216, 255, 87, 0.08);
-  border-radius: 50%;
+  border: var(--border-width) solid rgba(216, 255, 87, 0.08);
+  border-radius: var(--radius-circle);
   box-shadow:
     0 0 0 7vw rgba(216, 255, 87, 0.018),
     0 0 0 14vw rgba(172, 140, 255, 0.018);
@@ -59,7 +59,7 @@
 .status-dot {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   background: var(--lime);
   box-shadow: 0 0 0 5px rgba(216, 255, 87, 0.1);
   animation: pulse 2.4s ease-in-out infinite;
@@ -83,20 +83,20 @@
   width: 38px;
   height: 38px;
   place-items: center;
-  border: 1px solid var(--glass-border);
-  border-radius: 50%;
+  border: var(--border-width) solid var(--glass-border);
+  border-radius: var(--radius-circle);
   color: var(--lime);
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: var(--font-size-micro);
 }
 
 .hero-chapter-label p {
   margin: 0;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: var(--font-size-micro);
   line-height: 1.5;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-normal);
   text-transform: uppercase;
   white-space: pre-line;
 }
@@ -138,11 +138,11 @@
   right: -2%;
   bottom: 4%;
   left: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   background: var(--violet);
   transform: rotate(-2deg) scaleX(0);
   transform-origin: left;
-  animation: draw-line 900ms 700ms var(--ease-fluent) forwards;
+  animation: draw-line var(--duration-animation) 700ms var(--ease-fluent) forwards;
 }
 
 .hero-bottom {
@@ -174,19 +174,19 @@
 
 .hero-values span {
   padding: 8px 11px;
-  border: 1px solid var(--glass-border);
-  border-radius: 999px;
+  border: var(--border-width) solid var(--glass-border);
+  border-radius: var(--radius-full);
   background: var(--glass);
   backdrop-filter: blur(14px) saturate(130%);
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 8px;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-normal);
   text-transform: uppercase;
   transition:
-    color 220ms var(--ease-fluent),
-    border-color 220ms var(--ease-fluent),
-    transform 220ms var(--ease-fluent);
+    color var(--duration-fast) var(--ease-fluent),
+    border-color var(--duration-fast) var(--ease-fluent),
+    transform var(--duration-fast) var(--ease-fluent);
 }
 
 .hero-values span:nth-child(1):hover {
@@ -216,15 +216,15 @@
 .button {
   min-height: 52px;
   padding: 0 22px;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  font-size: 12px;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-md);
   font-weight: 700;
   white-space: nowrap;
   transition:
-    transform 250ms var(--ease-fluent),
-    background 250ms var(--ease-fluent),
-    border-color 250ms var(--ease-fluent);
+    transform var(--duration-normal) var(--ease-fluent),
+    background var(--duration-normal) var(--ease-fluent),
+    border-color var(--duration-normal) var(--ease-fluent);
 }
 
 .button:hover {
@@ -263,7 +263,7 @@
   margin: 0;
   padding: 12px;
   overflow: hidden;
-  border: 1px solid var(--glass-border);
+  border: var(--border-width) solid var(--glass-border);
   border-radius: 30px;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent 34%),
@@ -272,7 +272,7 @@
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.11),
     0 35px 90px rgba(0, 0, 0, 0.28);
-  animation: profile-in 900ms 250ms var(--ease-fluent) both;
+  animation: profile-in var(--duration-animation) 250ms var(--ease-fluent) both;
 }
 
 .hero-profile-image {
@@ -291,7 +291,7 @@
   filter: grayscale(0.72) contrast(1.06);
   transition:
     filter 600ms var(--ease-fluent),
-    transform 900ms var(--ease-fluent);
+    transform var(--duration-animation) var(--ease-fluent);
 }
 
 .hero-profile-card:hover .hero-profile-image img {
@@ -316,7 +316,7 @@
   font-family: var(--font-mono);
   font-size: 8px;
   font-style: normal;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-normal);
   text-transform: uppercase;
 }
 
@@ -341,7 +341,7 @@
   color: var(--lime);
   font-family: var(--font-mono);
   font-size: 8px;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
 }
 
@@ -412,8 +412,8 @@
   gap: 12px;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.08em;
+  font-size: var(--font-size-micro);
+  letter-spacing: var(--letter-spacing-normal);
   text-transform: uppercase;
   transform: rotate(90deg) translateX(100%);
   transform-origin: right bottom;

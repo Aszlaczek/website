@@ -167,7 +167,7 @@
   .story-visual,
   .story-chapter:nth-of-type(even) .story-visual {
     min-height: 480px;
-    border-radius: 80px 80px 22px 22px;
+    border-radius: 80px 80px var(--radius-sm) var(--radius-sm);
   }
 
   .story-copy,

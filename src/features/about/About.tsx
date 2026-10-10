@@ -31,7 +31,6 @@ export function About({ t }: AboutProps) {
           <StoryChapter
             key={chapter.number}
             chapter={chapter}
-            t={t.about}
             index={index}
           />
         ))}

@@ -1,6 +1,8 @@
 export const EMAIL = "awzorek23@gmail.com";
 
 export const PROFILE_IMAGE = "me.jpg";
+export const KARATE_IMAGE = "karate.jpg";
+export const CAMP_IMAGE = "camp.jpg";
 
 export const TICKER_ITEMS = [
   "React",

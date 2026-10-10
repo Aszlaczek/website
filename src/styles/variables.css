@@ -1,0 +1,39 @@
+:root {
+  /* Border Radius - najczęściej powtarzające się */
+  --radius-full: 999px;
+  --radius-circle: 50%;
+  --radius-lg: 28px;
+  --radius-md: 24px;
+
+  /* Font Sizes - najczęściej powtarzające się */
+  --font-size-micro: 9px;
+  --font-size-xs: 10px;
+  --font-size-sm: 11px;
+  --font-size-md: 12px;
+  --font-size-base: 13px;
+
+  /* Spacing - najczęściej powtarzające się */
+  --space-2: 10px;
+  --space-3: 12px;
+  --space-6: 20px;
+  --space-8: 24px;
+  --space-9: 28px;
+
+  /* Letter Spacing */
+  --letter-spacing-normal: 0.08em;
+  --letter-spacing-wide: 0.1em;
+
+  /* Transition/Animation Timing */
+  --duration-fast: 220ms;
+  --duration-normal: 250ms;
+  --duration-slow: 320ms;
+  --duration-animation: 900ms;
+
+  /* Z-Index */
+  --z-fixed: 50;
+  --z-modal: 90;
+
+  /* Inne */
+  --border-width: 1px;
+  --stroke-width: 1.7;
+}

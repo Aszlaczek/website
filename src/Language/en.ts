@@ -1,3 +1,4 @@
+import { KARATE_IMAGE, CAMP_IMAGE } from "@/data";
 export type Lang = "en" | "pl";
 
 export const en = {
@@ -65,7 +66,7 @@ export const en = {
         lead: "Fifteen years on the mat made that real.",
         body: "Karate taught me that confidence is built quietly: one technique, one mistake and one better attempt at a time. As an active instructor, I also learned to explain difficult things simply and notice when someone needs a push — or a little patience.",
         lesson: "Discipline → leadership",
-        image: "karate.jpg",
+        image: KARATE_IMAGE,
         alt: "Martial artist tightening a black belt",
         tone: "dojo",
       },
@@ -76,7 +77,7 @@ export const en = {
         lead: "Camps turned responsibility into an adventure.",
         body: "Trips, summer camps and groups of young people rarely follow the perfect plan. They taught me to organize the chaos, communicate with energy and stay calm when reality ships an unexpected feature. The best outcome is always something we create together.",
         lesson: "Responsibility → trust",
-        image: "camp.jpg",
+        image: CAMP_IMAGE,
         alt: "Campfire beside a forest lake",
         tone: "camp",
       },

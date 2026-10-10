@@ -2,11 +2,10 @@ import type { Translations } from "../../Language";
 
 interface StoryChapterProps {
   chapter: Translations["about"]["journey"][0];
-  t: Translations["about"];
   index: number;
 }
 
-export function StoryChapter({ chapter, t, index }: StoryChapterProps) {
+export function StoryChapter({ chapter, index }: StoryChapterProps) {
   const sideWords = ["BUILD", "PERSIST", "CONNECT"] as const;
 
   return (

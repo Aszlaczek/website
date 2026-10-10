@@ -1,3 +1,4 @@
+import { KARATE_IMAGE, CAMP_IMAGE } from "@/data";
 import type { en } from "./en";
 
 export const pl: typeof en = {
@@ -65,8 +66,7 @@ export const pl: typeof en = {
         lead: "Piętnaście lat na macie to uświadomiło.",
         body: "Karate nauczyło mnie, że pewność buduje się po cichu: jedna technika, jeden błąd i jedna lepsza próba na raz. Jako aktywny instruktor nauczyłem się też prosto wyjaśniać trudne rzeczy i dostrzegać, kiedy ktoś potrzebuje wsparcia — albo odrobinę cierpliwości.",
         lesson: "Dyscyplina → przywództwo",
-        image:
-          "https://images.unsplash.com/photo-1656653121475-e33829581294?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        image: KARATE_IMAGE,
         alt: "Artysta walki zapinający czarny pas",
         tone: "dojo",
       },
@@ -77,8 +77,7 @@ export const pl: typeof en = {
         lead: "Obozy zamieniły odpowiedzialność w przygodę.",
         body: "Wycieczki, obozy i grupy młodych ludzi rzadko podążają za idealnym planem. Nauczyły mnie organizować chaos, komunikować się z energią i zachowywać spokój, gdy rzeczywistość wdraża niespodziewaną funkcję. Najlepszy efekt to zawsze coś, co tworzymy razem.",
         lesson: "Odpowiedzialność → zaufanie",
-        image:
-          "https://images.unsplash.com/photo-1634206813008-d1c2b828c7fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        image: CAMP_IMAGE,
         alt: "Ognisko przy leśnym jeziorze",
         tone: "camp",
       },
@@ -104,11 +103,13 @@ export const pl: typeof en = {
     exp1Title: "Informatyk",
     exp1Company: "Starostwo Powiatowe w Lidzbarku Warmińskim",
     exp1Date: "Wrz 2025 – Wrz 2026",
-    exp1Desc: "Administrowałem systemami operacyjnymi i infrastrukturą sieciową w kilku lokalizacjach. Rozwiązywałem problemy techniczne pracowników (helpdesk). Zaprojektowałem i wdrożyłem aplikację w TypeScript, która automatycznie przeliczała czas wyjść z minut na godziny — z zapisem danych i eksportem do .xlsx.",
+    exp1Desc:
+      "Administrowałem systemami operacyjnymi i infrastrukturą sieciową w kilku lokalizacjach. Rozwiązywałem problemy techniczne pracowników (helpdesk). Zaprojektowałem i wdrożyłem aplikację w TypeScript, która automatycznie przeliczała czas wyjść z minut na godziny — z zapisem danych i eksportem do .xlsx.",
     exp2Title: "Administrator strony internetowej",
     exp2Company: "homideko.pl",
     exp2Date: "Cze 2024 – Lis 2024",
-    exp2Desc: "Przy użyciu PrestaShop zaktualizowałem i przeprojektowałem całą architekturę strony. Zwiększyłem ruch o 25% dzięki ulepszeniom strukturalnym i treściowym.",
+    exp2Desc:
+      "Przy użyciu PrestaShop zaktualizowałem i przeprojektowałem całą architekturę strony. Zwiększyłem ruch o 25% dzięki ulepszeniom strukturalnym i treściowym.",
   },
   projects: {
     section: "Wybrane projekty",
@@ -168,11 +169,14 @@ export const pl: typeof en = {
     other: "Inne narzędzia",
     otherItems: ["Git/GitHub", "CMS (WordPress, PrestaShop)"],
     communication: "Komunikacja",
-    communicationDesc: "Lata pracy z dziećmi i w zespole nauczyły mnie tłumaczyć złożone rzeczy w prosty sposób — na macie i w code review.",
+    communicationDesc:
+      "Lata pracy z dziećmi i w zespole nauczyły mnie tłumaczyć złożone rzeczy w prosty sposób — na macie i w code review.",
     leadership: "Samodzielność",
-    leadershipDesc: "Sam zauważyłem nieefektywny proces i zaproponowałem jego automatyzację — od analizy potrzeb, przez projekt, po wdrożenie w środowisku produkcyjnym.",
+    leadershipDesc:
+      "Sam zauważyłem nieefektywny proces i zaproponowałem jego automatyzację — od analizy potrzeb, przez projekt, po wdrożenie w środowisku produkcyjnym.",
     discipline: "Dyscyplina",
-    disciplineDesc: "Ponad 5 lat karate i pracy z dziećmi nauczyło mnie pracować pod presją i być konsekwentnym. To samo podejście wnoszę do tworzenia oprogramowania.",
+    disciplineDesc:
+      "Ponad 5 lat karate i pracy z dziećmi nauczyło mnie pracować pod presją i być konsekwentnym. To samo podejście wnoszę do tworzenia oprogramowania.",
   },
   contact: {
     section: "Kontakt",
@@ -185,7 +189,8 @@ export const pl: typeof en = {
     linkedin: "LinkedIn",
   },
   footer: {
-    copyright: "© 2026 Adrian Wzorek — MSc Eng. · Full Stack Developer · Sensei",
+    copyright:
+      "© 2026 Adrian Wzorek — MSc Eng. · Full Stack Developer · Sensei",
     tagline: "Zbudowane od zera · ",
     alwaysShipping: "Zawsze dostarczam.",
   },

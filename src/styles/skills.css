@@ -18,7 +18,7 @@
   height: 460px;
   right: -230px;
   bottom: -80px;
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   background: rgba(172, 140, 255, 0.065);
   filter: blur(130px);
   pointer-events: none;
@@ -37,8 +37,8 @@
   margin-bottom: 20px;
   color: var(--lime);
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.1em;
+  font-size: var(--font-size-micro);
+  letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
 }
 
@@ -76,7 +76,7 @@
   align-items: center;
   min-height: 128px;
   padding: 24px 28px;
-  border: 1px solid var(--glass-border);
+  border: var(--border-width) solid var(--glass-border);
   border-radius: 22px;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.085), transparent 36%),
@@ -97,7 +97,7 @@
   height: 120px;
   top: -80px;
   right: -60px;
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   background: var(--violet);
   filter: blur(45px);
   opacity: 0.16;
@@ -123,7 +123,7 @@
 .skill-group span {
   color: var(--lime);
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: var(--font-size-micro);
 }
 
 .skill-group h3 {
@@ -143,16 +143,16 @@
 
 .skill-group li {
   padding: 9px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-full);
+  border: var(--border-width) solid rgba(255, 255, 255, 0.07);
   background: rgba(255, 255, 255, 0.055);
   color: #c0bfc5;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--font-size-xs);
   transition:
-    background 220ms var(--ease-fluent),
-    color 220ms var(--ease-fluent),
-    transform 220ms var(--ease-fluent);
+    background var(--duration-fast) var(--ease-fluent),
+    color var(--duration-fast) var(--ease-fluent),
+    transform var(--duration-fast) var(--ease-fluent);
 }
 
 .skill-group li:hover {
@@ -180,8 +180,8 @@
   margin-bottom: 12px;
   color: var(--lime);
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.1em;
+  font-size: var(--font-size-micro);
+  letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
 }
 
@@ -204,23 +204,23 @@
   margin-right: 6px;
   color: var(--lime);
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
 }
 
 .tool-chip {
   padding: 9px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 999px;
+  border: var(--border-width) solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-full);
   background: rgba(255, 255, 255, 0.055);
   color: #c0bfc5;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--font-size-xs);
   transition:
-    background 220ms var(--ease-fluent),
-    color 220ms var(--ease-fluent),
-    transform 220ms var(--ease-fluent);
+    background var(--duration-fast) var(--ease-fluent),
+    color var(--duration-fast) var(--ease-fluent),
+    transform var(--duration-fast) var(--ease-fluent);
 }
 
 .tool-chip:hover {
