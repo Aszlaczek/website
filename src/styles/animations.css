@@ -1,0 +1,112 @@
+/* Base: visible by default (works without JS & without scroll-driven support) */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Progressive enhancement: scroll-driven reveal only when supported */
+@supports (animation-timeline: view()) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    animation: reveal var(--ease-fluent) both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+}
+
+@media (scripting: none) {
+  .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes title-in {
+  from {
+    opacity: 0;
+    transform: translateY(45px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes profile-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px) rotate(2deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes draw-line {
+  to {
+    transform: rotate(-2deg) scaleX(1);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    margin-top: 0;
+  }
+  50% {
+    margin-top: -12px;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 9px rgba(216, 255, 87, 0);
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translate(-90px, 70px) scale(0.85);
+  }
+}
+
+@keyframes story-pulse {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(520%);
+  }
+}
+
+@keyframes orbit-breathe {
+  50% {
+    transform: scale(1.08) rotate(8deg);
+  }
+}

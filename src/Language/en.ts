@@ -65,8 +65,7 @@ export const en = {
         lead: "Fifteen years on the mat made that real.",
         body: "Karate taught me that confidence is built quietly: one technique, one mistake and one better attempt at a time. As an active instructor, I also learned to explain difficult things simply and notice when someone needs a push — or a little patience.",
         lesson: "Discipline → leadership",
-        image:
-          "https://images.unsplash.com/photo-1656653121475-e33829581294?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        image: "karate.jpg",
         alt: "Martial artist tightening a black belt",
         tone: "dojo",
       },
@@ -77,8 +76,7 @@ export const en = {
         lead: "Camps turned responsibility into an adventure.",
         body: "Trips, summer camps and groups of young people rarely follow the perfect plan. They taught me to organize the chaos, communicate with energy and stay calm when reality ships an unexpected feature. The best outcome is always something we create together.",
         lesson: "Responsibility → trust",
-        image:
-          "https://images.unsplash.com/photo-1634206813008-d1c2b828c7fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        image: "camp.jpg",
         alt: "Campfire beside a forest lake",
         tone: "camp",
       },
@@ -104,11 +102,13 @@ export const en = {
     exp1Title: "IT Specialist",
     exp1Company: "District Office in Lidzbark Warmiński",
     exp1Date: "Sep 2025 – Sep 2026",
-    exp1Desc: "Managed OS and network infrastructure across multiple locations. Diagnosed and resolved technical issues (helpdesk). Designed and implemented a TypeScript application that automated leave time conversion from minutes to hours, with data recording and .xlsx export.",
+    exp1Desc:
+      "Managed OS and network infrastructure across multiple locations. Diagnosed and resolved technical issues (helpdesk). Designed and implemented a TypeScript application that automated leave time conversion from minutes to hours, with data recording and .xlsx export.",
     exp2Title: "Website Administrator",
     exp2Company: "homideko.pl",
     exp2Date: "Jun 2024 – Nov 2024",
-    exp2Desc: "Utilized PrestaShop CMS to update and redesign the entire website architecture. Increased website traffic by 25% through structural and content improvements.",
+    exp2Desc:
+      "Utilized PrestaShop CMS to update and redesign the entire website architecture. Increased website traffic by 25% through structural and content improvements.",
   },
   projects: {
     section: "Selected work",
@@ -168,11 +168,14 @@ export const en = {
     other: "Other tools",
     otherItems: ["Git/GitHub", "CMS (WordPress, PrestaShop)"],
     communication: "Communication",
-    communicationDesc: "Years of coaching children and working in teams taught me to explain complex ideas simply — on the mat and in code reviews.",
+    communicationDesc:
+      "Years of coaching children and working in teams taught me to explain complex ideas simply — on the mat and in code reviews.",
     leadership: "Independence",
-    leadershipDesc: "Self-identified an inefficient manual process and independently proposed and built its automation — from needs analysis through design to deployment in a production environment.",
+    leadershipDesc:
+      "Self-identified an inefficient manual process and independently proposed and built its automation — from needs analysis through design to deployment in a production environment.",
     discipline: "Discipline",
-    disciplineDesc: "5+ years of karate instruction and camp counseling taught me to perform under pressure and stay consistent. That's the same mindset I bring to shipping software.",
+    disciplineDesc:
+      "5+ years of karate instruction and camp counseling taught me to perform under pressure and stay consistent. That's the same mindset I bring to shipping software.",
   },
   contact: {
     section: "Get in touch",
@@ -185,7 +188,8 @@ export const en = {
     linkedin: "LinkedIn",
   },
   footer: {
-    copyright: "© 2026 Adrian Wzorek — MSc Eng. · Full Stack Developer · Sensei",
+    copyright:
+      "© 2026 Adrian Wzorek — MSc Eng. · Full Stack Developer · Sensei",
     tagline: "Built from scratch · ",
     alwaysShipping: "Always shipping.",
   },

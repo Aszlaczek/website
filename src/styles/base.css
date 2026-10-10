@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap");
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0c;
+  --surface: #121216;
+  --surface-raised: #18181e;
+  --foreground: #f5f2ea;
+  --muted: #9a999f;
+  --line: rgba(245, 242, 234, 0.14);
+  --lime: #d8ff57;
+  --violet: #ac8cff;
+  --cyan: #68e4e7;
+  --coral: #ff826b;
+  --glass: rgba(20, 20, 28, 0.58);
+  --glass-strong: rgba(26, 25, 36, 0.76);
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --font-display: "Syne", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-mono: "DM Mono", monospace;
+  --ease-fluent: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+a {
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--background);
+}
