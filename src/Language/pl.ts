@@ -1,5 +1,76 @@
+import type { ProjectCopy } from "../data/types";
+import type { ProjectId } from "../data/constants";
 import { KARATE_IMAGE, CAMP_IMAGE, WORKSPACE_IMAGE } from "@/data";
 import type { en } from "./en";
+
+const projectItems: Record<ProjectId, ProjectCopy> = {
+  workout: {
+    tag: "Full-stack",
+    desc: "Planowanie treningów i analiza postępów w jednej aplikacji.",
+    problem:
+      "Rozproszone notatki utrudniają śledzenie treningów i porównywanie wyników.",
+    decisions: [
+      "Model relacyjny w PostgreSQL; Supabase Auth i RLS kontrolują dostęp do danych.",
+      "Współdzielone plany treningowe oddzielone od prywatnej historii; wykresy w Recharts.",
+    ],
+    outcome: "Plany, zapis serii i historia postępów w jednym miejscu.",
+  },
+  counter: {
+    tag: "Narzędzie dla administracji",
+    desc: "Przeliczanie czasu wyjść pracowników, ewidencja wpisów i eksport XLSX.",
+    problem:
+      "Ręczne przeliczanie minut na godziny i przygotowywanie zestawień.",
+    decisions: [
+      "Minuty przechowywane jako liczby; format godzin jest wyliczany do prezentacji.",
+      "Zustand zarządza wpisami, a ExcelJS eksportuje osobne kolumny godzin, minut i sumy.",
+    ],
+    outcome:
+      "Dodawanie, edycja i usuwanie wpisów oraz zestawienie gotowe do Excela.",
+    note: "Wdrożenie w urzędzie i 2 użytkowników.",
+  },
+  calculator: {
+    tag: "Parser i wizualizacja",
+    desc: "Kalkulator naukowy z własnym parserem wyrażeń i wykresami funkcji.",
+    problem: "Obliczanie i wizualizowanie tej samej formuły matematycznej.",
+    decisions: [
+      "Tokenizator i parser rekurencyjnego zejścia budują AST, obliczane bez eval.",
+      "Canvas rysuje wykres funkcji z możliwością powiększania i przesuwania.",
+    ],
+    outcome: "Jeden silnik wyrażeń do obliczeń i wykresów; obsługa klawiatury.",
+  },
+  teacher: {
+    tag: "Narzędzie językowe",
+    desc: "Tłumaczenia, korekta zdań i przykłady użycia w czterech językach.",
+    problem:
+      "Nauka języka wymaga zarówno tłumaczenia, jak i wyjaśnienia błędów.",
+    decisions: [
+      "Endpoint Next.js wywołuje Gemini po stronie serwera.",
+      "Walidacja danych wejściowych i kolejne próby z różnymi modelami przy błędach API.",
+    ],
+    outcome: "Tłumaczenie i korekta z przykładami w jednym formularzu.",
+  },
+  colors: {
+    tag: "Narzędzie frontendowe",
+    desc: "Zapisywanie, porównywanie i filtrowanie własnej palety kolorów.",
+    problem:
+      "Potrzeba szybkiego zebrania kolorów bez konta i osobnego programu.",
+    decisions: [
+      "localStorage zachowuje paletę między wizytami.",
+      "Wartości HEX/RGB są przeliczane na HSL; filtry działają na kanałach kolorów.",
+    ],
+    outcome: "Paleta w widoku listy lub siatki, z kopiowaniem kodów.",
+  },
+  memory: {
+    tag: "Gra przeglądarkowa",
+    desc: "Gra w dobieranie par na planszy 4 × 4.",
+    problem: "Ćwiczenie pamięci z czytelną informacją o ruchach i wyniku.",
+    decisions: [
+      "Własny hook oddziela logikę gry od komponentów React.",
+      "Tasowanie Fishera–Yatesa i kontrola odkrywania maksymalnie dwóch kart.",
+    ],
+    outcome: "Osiem par, licznik ruchów i możliwość rozpoczęcia nowej gry.",
+  },
+};
 
 export const pl: typeof en = {
   nav: {
@@ -9,6 +80,10 @@ export const pl: typeof en = {
     contact: "kontakt",
     hireMe: "Zatrudnij mnie",
     menu: "Menu",
+    primary: "Główna nawigacja",
+    home: "Początek strony",
+    switchLanguage: "Switch to English",
+    skip: "Przejdź do treści",
     closeMenu: "Zamknij menu",
   },
   hero: {
@@ -17,7 +92,7 @@ export const pl: typeof en = {
     title1: "Buduję rzeczy",
     title2: "w sieci.",
     title3: "Też: instruktor karate.",
-    desc: "Magister inżynier informatyki, specjalizuję się w React/Next.js i Node.js, backendowo pracuję też w Pythonie (FastAPI/Django). Zdobyłem doświadczenie w administracji systemami IT i automatyzacji procesów w środowisku produkcyjnym — od analizy potrzeb, przez projekt, po wdrożenie.",
+    desc: "Jestem magistrem inżynierem informatyki. Tworzząc aplikacje w React, TypeScript i Next.js, rozwijam się w kierunku full-stack. Mam doświadczenie we wsparciu IT i wdrażaniu narzędzi usprawniających codzienną pracę.",
     seeWork: "Zobacz moje projekty ↓",
     downloadCv: "Pobierz CV",
     karate: "Instruktor\nKarate",
@@ -26,11 +101,13 @@ export const pl: typeof en = {
     ghostText: "DEV + SENSEI",
     chapterLabel: "Historia o ciekawości,\ndyscyplinie i ludziach",
     scrollCue: "Przewiń, aby odkryć",
+    valuesLabel: "Moje podejście",
     values: ["01 / Rozwiązuj", "02 / Wytrwaj", "03 / Łącz"],
   },
   stats: {
-    years: "Lat kodowania",
-    degree: "Magister IT",
+    label: "W skrócie",
+    years: "Lat nauki kodowania",
+    degree: "Mgr inż. informatyki",
     karate: "Lat karate",
     camps: "Lat nauczania",
   },
@@ -44,7 +121,7 @@ export const pl: typeof en = {
     storyOpening: {
       index: "00 / PROLOG",
       p1: "Nie jestem tylko programistą, instruktorem ani opiekunem na obozie.",
-      p2: "Jestem sumą każdego problemu, przy którym wytrwałem, każdej osoby, którą pomogłem rozwinąć i każdego planu, który po drodze musiałem wymyślić od nowa.",
+      p2: "Jestem sumą każdego problemu, przy którym wytrwałem, każdej osoby, której pomogłem się rozwinąć i każdego planu, który po drodze musiałem wymyślić od nowa.",
     },
     journey: [
       {
@@ -66,7 +143,7 @@ export const pl: typeof en = {
         body: "Karate nauczyło mnie, że pewność buduje się po cichu: jedna technika, jeden błąd i jedna lepsza próba na raz. Jako aktywny instruktor nauczyłem się też prosto wyjaśniać trudne rzeczy i dostrzegać, kiedy ktoś potrzebuje wsparcia — albo odrobinę cierpliwości.",
         lesson: "Dyscyplina → przywództwo",
         image: KARATE_IMAGE,
-        alt: "Artysta walki zapinający czarny pas",
+        alt: "Karateka przygotowujący się do rozbicia stosu płyt",
         tone: "dojo",
       },
       {
@@ -77,7 +154,7 @@ export const pl: typeof en = {
         body: "Wycieczki, obozy i grupy młodych ludzi rzadko podążają za idealnym planem. Nauczyły mnie organizować chaos, komunikować się z energią i zachowywać spokój, gdy rzeczywistość wdraża niespodziewaną funkcję. Najlepszy efekt to zawsze coś, co tworzymy razem.",
         lesson: "Odpowiedzialność → zaufanie",
         image: CAMP_IMAGE,
-        alt: "Ognisko przy leśnym jeziorze",
+        alt: "Mężczyzna z plecakiem nad jeziorem",
         tone: "camp",
       },
     ],
@@ -108,46 +185,19 @@ export const pl: typeof en = {
     exp2Company: "homideko.pl",
     exp2Date: "Cze 2024 – Lis 2024",
     exp2Desc:
-      "Przy użyciu PrestaShop zaktualizowałem i przeprojektowałem całą architekturę strony. Zwiększyłem ruch o 25% dzięki ulepszeniom strukturalnym i treściowym.",
+      "Aktualizowałem i przebudowywałem strukturę oraz treści witryny opartej na PrestaShop.",
   },
   projects: {
     section: "Wybrane projekty",
     title1: "Projekty z",
     title2: "misją.",
-    featured: "Wyróżnione",
-    all: "Wszystkie",
-    items: [
-      {
-        tag: "Aplikacja web",
-        desc: "Full-stackowa platforma do śledzenia postępów na treningu siłowym — planowanie, logowanie i analiza treningów. Zbudowana w Next.js, TypeScript i Tailwind CSS, z backendem Supabase (PostgreSQL + RLS + Auth). Obejmuje planowanie rutyn, logowanie treningów na żywo z stoperem, bibliotekę ćwiczeń, interaktywne wykresy postępów z śledzeniem rekordów oraz mobile-first design z dolną nawigacją. Rozwiązuje problem: zastąpienie rozproszonych arkuszy i notatek jednym narzędziem. Wniosek: aplikacja full-stack z autoryzacją, RLS, złożonym zarządzaniem stanem i responsywnym designem od zera.",
-        demo: "https://work-out-theta.vercel.app",
-        code: "https://github.com/Aszlaczek/work-out",
-      },
-      {
-        tag: "Aplikacja web",
-        desc: "Aplikacja do śledzenia i odmierzania czasu, idealna do pracy w skupieniu. Zbudowana w React i TypeScript, z typowanym reducerem i licznikami, które nie powodują skoków layoutu. Wdrożona na Vercel z podglądem dla każdego pusha. Rozwiązuje problem: szybkie, darmowe mierzenie czasu bez rejestracji. Wniosek: dopięcie małego, dopracowanego narzędzia od UI po CI.",
-        demo: "https://counter-psi-blush.vercel.app/",
-        code: "https://github.com/Aszlaczek/Counter",
-      },
-      {
-        tag: "Narzędzie AI",
-        desc: "Narzędzie AI do wyszukiwania i tłumaczenia słów oraz zwrotów prostym językiem. Full-stack: front end w React i TypeScript, warstwa API w Node.js i strumieniowe odpowiedzi modelu, wszystko w czystym, intuicyjnym interfejsie. Dostępne od razu na Vercel. Rozwiązuje problem: wolne, pełne reklam zamienniki słowników — teraz jedno szybkie wyszukiwanie. Wniosek: odpowiedzialna integracja LLM-ów ze stanami ładowania, błędów i limitów.",
-        demo: "https://teacherai-mu.vercel.app",
-        code: "https://github.com/Aszlaczek/Teacher_AI",
-      },
-      {
-        tag: "Narzędzie",
-        desc: "Wygodne narzędzie do sprawdzania i konwersji kolorów w formatach HEX, RGB i HSL. Napisane w React i TypeScript, z podglądem na żywo i kopiowaniem dowolnego formatu jednym kliknięciem. Wdrożone na Vercel. Rozwiązuje problem: chaotyczny deskopowy workflow zastąpiony jednym narzędziem w przeglądarce. Wniosek: analiza danych wejściowych, kontrast pod kątem dostępności i minimalny, szybki UI.",
-        demo: "https://colorchecker-omega.vercel.app/",
-        code: "https://github.com/Aszlaczek/ColorChecker",
-      },
-      {
-        tag: "Gra",
-        desc: "Przeglądarkowa gra pamięciowa z kilkoma poziomami trudności, licznikiem ruchów i restartem. Napisana w czystym JavaScript — bez frameworków: DOM, przejścia CSS i najlepsze wyniki w localStorage. Hostowana na Vercel. Rozwiązuje problem: atrakcyjny, wolny od zależności pokaz zarządzania stanem od zera. Wniosek: pętla gry, timery i czysta organizacja kodu bez Reacta.",
-        demo: "https://memory-game-tan-five.vercel.app",
-        code: "https://github.com/Aszlaczek/memory-game",
-      },
-    ],
+    featured: "Tylko wyróżnione",
+    all: "Pokaż wszystkie",
+    problem: "Problem",
+    outcome: "Rezultat",
+    details: "Decyzje techniczne",
+    code: "Kod",
+    items: projectItems,
   },
   skills: {
     section: "Stack technologiczny",
@@ -155,7 +205,7 @@ export const pl: typeof en = {
     title2: "i fundamenty.",
     introEyebrow: "Jak wybieram narzędzia",
     introText:
-      "Częściej zależy mi na rozwiązaniu właściwego problemu niż na gonieniu za każdym nowym frameworkiem.",
+      "Bardziej zależy mi na rozwiązaniu właściwego problemu niż na gonieniu za każdym nowym frameworkiem.",
     introStrong:
       "Najpierw mocne fundamenty. Potem właściwa technologia. Nauka się nie kończy.",
     groups: ["Języki", "Frontend", "Backend", "Bazy danych"],
@@ -169,20 +219,37 @@ export const pl: typeof en = {
     otherItems: ["Git/GitHub", "CMS (WordPress, PrestaShop)"],
     communication: "Komunikacja",
     communicationDesc:
-      "Lata pracy z dziećmi i w zespole nauczyły mnie tłumaczyć złożone rzeczy w prosty sposób — na macie i w code review.",
+      "Lata pracy z dziećmi i w zespole nauczyły mnie tłumaczyć złożone rzeczy w prosty sposób — podczas zajęć i wspólnego rozwiązywania problemów.",
     leadership: "Samodzielność",
     leadershipDesc:
       "Sam zauważyłem nieefektywny proces i zaproponowałem jego automatyzację — od analizy potrzeb, przez projekt, po wdrożenie w środowisku produkcyjnym.",
     discipline: "Dyscyplina",
     disciplineDesc:
-      "Ponad 5 lat karate i pracy z dziećmi nauczyło mnie pracować pod presją i być konsekwentnym. To samo podejście wnoszę do tworzenia oprogramowania.",
+      "Ponad 5 lat prowadzenia zajęć karate i pracy z dziećmi nauczyło mnie pracować pod presją i być konsekwentnym. To samo podejście wnoszę do tworzenia oprogramowania.",
+  },
+  workflow: {
+    title: "AI-assisted development",
+    desc: "Wykorzystuję Codex i Claude Code do wspierania implementacji aplikacji. Pracę rozpoczynam od zdefiniowania problemu i struktury projektu. Analizuję wygenerowane zmiany, sprawdzam działanie aplikacji oraz utrzymuję dokumentację pozwalającą zachować kontekst między kolejnymi sesjami agentów.",
+    steps: [
+      "Problem i oczekiwany rezultat",
+      "Struktura plików i odpowiedzialności",
+      "Wymagania jakościowe, w tym DRY",
+      "Implementacja z agentem",
+      "Przegląd kodu i zmian",
+      "Build, testy i sprawdzenie aplikacji",
+    ],
+    docs: "Kontekst w PERSONAL.md po istotnych zmianach; ukończone i przyszłe zadania w DONE.md i TODO.md.",
   },
   contact: {
     section: "Kontakt",
     ghostText: "ZBUDUJMY COŚ",
     title1: "Szukasz",
-    title2: "developera, który dostarcza?",
-    desc: "Aktywnie szukam pracy jako junior web developer. Otwarty na etat, hybryd lub zdalną. Porozmawiajmy — odpowiadam szybciej niż wykonuję kata.",
+    title2: "programisty do zespołu?",
+    desc: "Aktywnie szukam pracy jako junior web developer. Interesuje mnie praca stacjonarna, hybrydowa lub zdalna. Porozmawiajmy — odpowiadam szybciej niż wykonuję kata.",
+    copyEmail: "Kopiuj adres e-mail",
+    sendEmail: "Napisz e-mail",
+    copyError:
+      "Nie udało się skopiować. Zaznacz adres lub wybierz Napisz e-mail.",
     copied: "✓ Skopiowano!",
     github: "GitHub",
     linkedin: "LinkedIn",

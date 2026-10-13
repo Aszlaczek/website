@@ -8,7 +8,7 @@ const rootEl = document.getElementById('root')!
 
 const tree = (
   <React.StrictMode>
-    <LanguageProvider>
+    <LanguageProvider initialLang={document.documentElement.lang === 'pl' ? 'pl' : 'en'}>
       <App />
     </LanguageProvider>
   </React.StrictMode>

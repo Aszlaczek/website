@@ -308,6 +308,24 @@
     order: 3;
   }
 }
-.projects-grid:not(.show-all) .project-card:nth-child(n + 4) {
-  display: none;
-}
+/* The hidden attribute is the single source of filter state. */
+.project-card[hidden] { display: none; }
+.project-card h3 { margin-top: 44px; overflow-wrap: anywhere; }
+.project-card > p { margin-bottom: 20px; }
+.project-facts { position: relative; margin: 0 0 20px; font-size: 14px; line-height: 1.65; }
+.project-facts > div + div { margin-top: 14px; }
+.project-facts dt { color: var(--project-accent); font-weight: 600; }
+.project-facts dd { margin: 4px 0 0; color: var(--muted); }
+.project-details { position: relative; margin-bottom: 24px; font-size: 14px; line-height: 1.65; }
+.project-details summary { cursor: pointer; padding-block: 10px; color: var(--foreground); }
+.project-details ul { padding-left: 20px; color: var(--muted); }
+.project-details li + li { margin-top: 8px; }
+.project-details p { color: var(--muted); }
+.project-footer { flex-direction: column; align-items: flex-start; gap: 18px; margin-top: auto; }
+.project-stack { display: flex; flex-wrap: wrap; gap: 7px; padding: 0; margin: 0; list-style: none; }
+.project-stack li { padding: 7px 10px; border: 1px solid var(--glass-border); border-radius: var(--radius-full); color: var(--muted); font-family: var(--font-mono); font-size: 11px; }
+.project-footer .project-links { gap: 24px; }
+.project-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 12px; }
+.project-link::after { content: none; }
+
+.project-card > .project-note { font-size: 13px; line-height: 1.65; }

@@ -15,6 +15,9 @@ export function Header() {
     const trigger = document.activeElement as HTMLElement | null;
     const sheet = sheetRef.current;
     const focusable = () => Array.from(sheet?.querySelectorAll<HTMLElement>("a[href], button") ?? []);
+    const background = [document.getElementById("main-content"), document.querySelector(".nav-wrap"), document.querySelector(".footer"), document.querySelector(".skip-link")].filter((element): element is HTMLElement => element instanceof HTMLElement);
+    const previousInert = background.map((element) => element.inert);
+    background.forEach((element) => { element.inert = true; });
     focusable()[0]?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setNavOpen(false);
@@ -22,10 +25,10 @@ export function Header() {
       const items = focusable();
       const first = items[0];
       const last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
+      if (event.shiftKey && (document.activeElement === first || !sheet?.contains(document.activeElement))) {
         event.preventDefault();
         last?.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
+      } else if (!event.shiftKey && (document.activeElement === last || !sheet?.contains(document.activeElement))) {
         event.preventDefault();
         first?.focus();
       }
@@ -37,7 +40,9 @@ export function Header() {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       desktop.removeEventListener("change", onResize);
-      trigger?.focus({ preventScroll: true });
+      background.forEach((element, index) => { element.inert = previousInert[index]; });
+      const restoreTarget = desktop.matches ? document.querySelector<HTMLElement>(".brand") : trigger;
+      restoreTarget?.focus({ preventScroll: true });
     };
   }, [navOpen]);
 

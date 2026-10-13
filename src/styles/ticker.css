@@ -27,3 +27,8 @@
   margin-left: 28px;
   font-size: 14px;
 }
+/* One entrance cycle keeps the visual character without perpetual moving text. */
+.ticker-track {
+  animation-iteration-count: infinite;
+  animation-duration: 15s;
+}

@@ -1,5 +1,76 @@
+import type { ProjectCopy } from "../data/types";
+import type { ProjectId } from "../data/constants";
 import { KARATE_IMAGE, CAMP_IMAGE, WORKSPACE_IMAGE } from "@/data";
-export type Lang = "en" | "pl";
+
+const projectItems: Record<ProjectId, ProjectCopy> = {
+  workout: {
+    tag: "Full-stack",
+    desc: "Workout planning and progress tracking in one application.",
+    problem:
+      "Scattered notes make it difficult to track workouts and compare results.",
+    decisions: [
+      "Relational PostgreSQL model; Supabase Auth and RLS control data access.",
+      "Shared workout plans are separated from private history; Recharts displays progress.",
+    ],
+    outcome: "Plans, set logging and progress history in one place.",
+  },
+  counter: {
+    tag: "Office utility",
+    desc: "Employee time conversion, entry management and XLSX export.",
+    problem:
+      "Manually converting minutes into hours and preparing time reports.",
+    decisions: [
+      "Minutes are stored as numbers; hours are calculated for display.",
+      "Zustand manages entries; ExcelJS exports separate hours, minutes and total columns.",
+    ],
+    outcome:
+      "Create, edit and delete entries, then export an Excel-ready report.",
+    note: "Deployed in a county office and used by two staff members.",
+  },
+  calculator: {
+    tag: "Parser & visualization",
+    desc: "A scientific calculator with a custom expression parser and function plots.",
+    problem: "Calculating and visualizing the same mathematical expression.",
+    decisions: [
+      "A tokenizer and recursive-descent parser build an AST, evaluated without eval.",
+      "Canvas renders function graphs with zoom and pan controls.",
+    ],
+    outcome:
+      "One expression engine for calculations and plots, with keyboard support.",
+  },
+  teacher: {
+    tag: "Language tool",
+    desc: "Translation, sentence correction and usage examples across four languages.",
+    problem:
+      "Language learning needs explanations of mistakes as well as translations.",
+    decisions: [
+      "A Next.js endpoint calls Gemini on the server.",
+      "Input validation and fallback requests to alternative models handle API failures.",
+    ],
+    outcome: "Translation and correction with examples in one form.",
+  },
+  colors: {
+    tag: "Frontend utility",
+    desc: "Save, compare and filter a personal color palette.",
+    problem:
+      "Collecting colors quickly without an account or a separate desktop tool.",
+    decisions: [
+      "localStorage keeps the palette between visits.",
+      "HEX/RGB values are converted to HSL; filters operate on color channels.",
+    ],
+    outcome: "List and grid views with one-click color code copying.",
+  },
+  memory: {
+    tag: "Browser game",
+    desc: "A matching-pairs game on a 4 × 4 board.",
+    problem: "A memory exercise with clear move counts and score feedback.",
+    decisions: [
+      "A custom hook separates game logic from React components.",
+      "Fisher–Yates shuffling and a limit of two revealed cards control each turn.",
+    ],
+    outcome: "Eight pairs, a move counter and a new-game flow.",
+  },
+};
 
 export const en = {
   nav: {
@@ -9,6 +80,10 @@ export const en = {
     contact: "contact",
     hireMe: "Hire me",
     menu: "Menu",
+    primary: "Primary navigation",
+    home: "Homepage",
+    switchLanguage: "Przełącz na polski",
+    skip: "Skip to content",
     closeMenu: "Close menu",
   },
   hero: {
@@ -17,7 +92,7 @@ export const en = {
     title1: "I build things",
     title2: "for the web.",
     title3: "Also: karate instructor.",
-    desc: "MSc Eng. in Computer Science, specializing in React/Next.js and Node.js, with backend experience in Python (FastAPI/Django). I gained hands-on IT experience administering systems and automating processes in a production environment — from needs analysis through design to deployment.",
+    desc: "I hold an MSc Eng. in Computer Science and build applications with React, TypeScript and Next.js as I develop my full-stack skills. My experience includes IT support and delivering tools that improve everyday work.",
     seeWork: "See my work ↓",
     downloadCv: "Download CV",
     karate: "Karate\nInstructor",
@@ -26,10 +101,12 @@ export const en = {
     ghostText: "DEV + SENSEI",
     chapterLabel: "A story about curiosity,\ndiscipline & people",
     scrollCue: "Scroll to discover",
+    valuesLabel: "My approach",
     values: ["01 / Solve", "02 / Persist", "03 / Connect"],
   },
   stats: {
-    years: "Years coding",
+    label: "Quick facts",
+    years: "Years learning to code",
     degree: "MSc Eng. IT",
     karate: "Karate years",
     camps: "Years instructing",
@@ -66,7 +143,7 @@ export const en = {
         body: "Karate taught me that confidence is built quietly: one technique, one mistake and one better attempt at a time. As an active instructor, I also learned to explain difficult things simply and notice when someone needs a push — or a little patience.",
         lesson: "Discipline → leadership",
         image: KARATE_IMAGE,
-        alt: "Martial artist tightening a black belt",
+        alt: "Karate practitioner preparing to break a stack of boards",
         tone: "dojo",
       },
       {
@@ -77,7 +154,7 @@ export const en = {
         body: "Trips, summer camps and groups of young people rarely follow the perfect plan. They taught me to organize the chaos, communicate with energy and stay calm when reality ships an unexpected feature. The best outcome is always something we create together.",
         lesson: "Responsibility → trust",
         image: CAMP_IMAGE,
-        alt: "Campfire beside a forest lake",
+        alt: "Man with a backpack beside a lake",
         tone: "camp",
       },
     ],
@@ -108,46 +185,19 @@ export const en = {
     exp2Company: "homideko.pl",
     exp2Date: "Jun 2024 – Nov 2024",
     exp2Desc:
-      "Utilized PrestaShop CMS to update and redesign the entire website architecture. Increased website traffic by 25% through structural and content improvements.",
+      "Updated and restructured the content and layout of a PrestaShop website.",
   },
   projects: {
     section: "Selected work",
     title1: "Projects with",
     title2: "purpose.",
-    featured: "Featured",
-    all: "All",
-    items: [
-      {
-        tag: "Web App",
-        desc: "A full-stack gym progress platform for planning, logging, and analyzing strength workouts. Built with Next.js, TypeScript, and Tailwind CSS, with a Supabase backend (PostgreSQL + RLS + Auth). Features routine planning, live workout logging with timers, exercise library, interactive progress charts with PR tracking, and a mobile-first design with bottom navigation. Problem solved: replacing scattered spreadsheets and notes with one unified workout tracker. Takeaway: full-stack app with auth, row-level security, complex state management, and responsive design from scratch.",
-        demo: "https://work-out-theta.vercel.app",
-        code: "https://github.com/Aszlaczek/work-out",
-      },
-      {
-        tag: "Web App",
-        desc: "A focused time-tracking and countdown tool for staying on top of deep-work sessions. Built with React and TypeScript, it keeps state predictable with a typed reducer and renders live timers without layout jitter. Deployed on Vercel with automatic previews for every push. Problem solved: quick, distraction-free timing without signing up for a SaaS. Takeaway: shipping a small, polished utility end to end — from UI states to CI deploys.",
-        demo: "https://counter-psi-blush.vercel.app/",
-        code: "https://github.com/Aszlaczek/Counter",
-      },
-      {
-        tag: "AI Tool",
-        desc: "An AI-powered search and dictionary tool that explains words and phrases in plain language. Full-stack build with a React + TypeScript front end, a Node.js API layer and streaming AI responses, wrapped in a clean, intuitive interface. Deployed on Vercel so anyone can try it instantly. Problem solved: turning slow, ad-heavy reference sites into one fast conversational lookup. Takeaway: integrating LLM APIs responsibly with loading, error and rate-limit states.",
-        demo: "https://teacherai-mu.vercel.app",
-        code: "https://github.com/Aszlaczek/Teacher_AI",
-      },
-      {
-        tag: "Utility App",
-        desc: "A developer-friendly color tool for checking, converting and previewing colors in HEX, RGB and HSL. Built with React and TypeScript, it updates the preview in real time and copies any format to the clipboard in one click. Deployed on Vercel for instant access. Problem solved: replacing a messy desktop workflow with one keyboard-friendly browser tool. Takeaway: careful input parsing, accessibility contrast handling and a minimal, fast UI.",
-        demo: "https://colorchecker-omega.vercel.app/",
-        code: "https://github.com/Aszlaczek/ColorChecker",
-      },
-      {
-        tag: "Game",
-        desc: "A browser-based memory card-matching game with multiple difficulty levels, move counters and a restart flow. Written in vanilla JavaScript with no frameworks — just the DOM, CSS transitions and localStorage for best scores. Hosted on Vercel. Problem solved: an entertaining, dependency-free demo of state management from scratch. Takeaway: fundamentals of game loops, timers and clean code organization without React.",
-        demo: "https://memory-game-tan-five.vercel.app",
-        code: "https://github.com/Aszlaczek/memory-game",
-      },
-    ],
+    featured: "Featured only",
+    all: "Show all projects",
+    problem: "Problem",
+    outcome: "Outcome",
+    details: "Technical decisions",
+    code: "Code",
+    items: projectItems,
   },
   skills: {
     section: "Tech stack",
@@ -169,7 +219,7 @@ export const en = {
     otherItems: ["Git/GitHub", "CMS (WordPress, PrestaShop)"],
     communication: "Communication",
     communicationDesc:
-      "Years of coaching children and working in teams taught me to explain complex ideas simply — on the mat and in code reviews.",
+      "Years of coaching children and working in teams taught me to explain complex ideas simply — during classes and collaborative problem solving.",
     leadership: "Independence",
     leadershipDesc:
       "Self-identified an inefficient manual process and independently proposed and built its automation — from needs analysis through design to deployment in a production environment.",
@@ -177,12 +227,28 @@ export const en = {
     disciplineDesc:
       "5+ years of karate instruction and camp counseling taught me to perform under pressure and stay consistent. That's the same mindset I bring to shipping software.",
   },
+  workflow: {
+    title: "AI-assisted development",
+    desc: "I use Codex and Claude Code to support application development. I begin by defining the problem and planning the project structure, then review generated changes, validate application behavior and maintain documentation to preserve context across agent sessions.",
+    steps: [
+      "Problem and expected outcome",
+      "File structure and responsibilities",
+      "Quality requirements, including DRY",
+      "Implementation with an agent",
+      "Code and change review",
+      "Build, tests and behavior checks",
+    ],
+    docs: "Context in PERSONAL.md after significant changes; completed and upcoming tasks in DONE.md and TODO.md.",
+  },
   contact: {
     section: "Get in touch",
     ghostText: "LET'S BUILD",
     title1: "Looking for a",
-    title2: "dev who delivers?",
+    title2: "developer for your team?",
     desc: "I'm actively looking for a junior-level web developer position. Open to full-time, hybrid, or remote roles. Let's talk — I respond faster than my kata routines.",
+    copyEmail: "Copy email address",
+    sendEmail: "Send an email",
+    copyError: "Could not copy. Select the address or choose Send an email.",
     copied: "✓ Copied!",
     github: "GitHub",
     linkedin: "LinkedIn",

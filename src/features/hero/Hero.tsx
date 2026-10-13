@@ -1,4 +1,5 @@
 import { ArrowIcon } from "../../components/ui";
+import { publicAsset } from "../../lib/assets";
 import { PROFILE_IMAGE } from "../../data";
 import type { Translations } from "../../Language";
 
@@ -37,7 +38,7 @@ export function Hero({ t, lang }: HeroProps) {
         <div className="hero-bottom reveal">
           <div>
             <p>{t.hero.desc}</p>
-            <div className="hero-values" aria-label="Personal values">
+            <div className="hero-values" aria-label={t.hero.valuesLabel}>
               {t.hero.values.map((value) => (
                 <span key={value}>{value}</span>
               ))}
@@ -49,7 +50,8 @@ export function Hero({ t, lang }: HeroProps) {
             </a>
             <a
               className="button button-ghost"
-              href={`files/CV_AdrianWzorek_${lang}.pdf`}
+              href={publicAsset(`files/CV_AWzorek_new_${lang.toUpperCase()}.pdf`)}
+              download
             >
               {t.hero.downloadCv} <span>↓</span>
             </a>

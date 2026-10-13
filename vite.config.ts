@@ -3,14 +3,18 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { visualizer } from "rollup-plugin-visualizer";
 
-const base = process.env.GITHUB_ACTIONS ? "/website/" : "/";
+const base =
+  process.env.VITE_BASE_PATH ||
+  (process.env.GITHUB_ACTIONS === "true" ? "/website/" : "/");
 
 export default defineConfig({
   base,
   plugins: [
     react(),
     tailwindcss(),
-    process.env.ANALYZE ? visualizer({ filename: "dist/stats.html", gzipSize: true }) : null,
+    process.env.ANALYZE
+      ? visualizer({ filename: "dist/stats.html", gzipSize: true })
+      : null,
   ].filter(Boolean),
   resolve: {
     alias: {
