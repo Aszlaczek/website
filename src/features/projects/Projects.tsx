@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PROJECTS } from "../../data";
 import { ProjectCard } from "./ProjectCard";
 import { SectionTitle } from "../../components/ui";
@@ -9,7 +9,9 @@ interface ProjectsProps {
 }
 
 export function Projects({ t }: ProjectsProps) {
-  const [showAll, setShowAll] = useState(false);
+  // Prerender all projects for readers without JavaScript; enhance after hydration.
+  const [showAll, setShowAll] = useState(true);
+  useEffect(() => setShowAll(false), []);
 
   return (
     <section className="section projects-section" id="projects">
@@ -28,16 +30,21 @@ export function Projects({ t }: ProjectsProps) {
             type="button"
           >
             {showAll ? t.projects.featured : t.projects.all}
-            <span>{showAll ? "−" : "+"}</span>
+            <span>{showAll ? "-" : "+"}</span>
           </button>
         </div>
 
-        <div id="projects-grid" className={`projects-grid${showAll ? " show-all" : ""}`}>
-          {PROJECTS.map((project, index) => (
+        <div
+          id="projects-grid"
+          className={`projects-grid${showAll ? " show-all" : ""}`}
+        >
+          {PROJECTS.map((project) => (
             <ProjectCard
-              key={project.num}
+              key={project.id}
               project={project}
-              t={t.projects.items[index]}
+              t={t.projects.items[project.id]}
+              labels={t.projects}
+              hidden={!showAll && !project.featured}
             />
           ))}
         </div>

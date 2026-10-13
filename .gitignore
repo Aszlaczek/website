@@ -6,3 +6,8 @@ dist/
 *.md
 .*
 agents/
+design/
+!PERSONAL.md
+!DONE.md
+!TODO.md
+*.tsbuildinfo

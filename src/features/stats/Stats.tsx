@@ -7,7 +7,7 @@ interface StatsProps {
 
 export function Stats({ t }: StatsProps) {
   return (
-    <section className="stats content-width" aria-label="Quick facts">
+    <section className="stats content-width" aria-label={t.stats.label}>
       {STATS.map((stat) => (
         <div className="stat reveal" key={stat.key}>
           <strong>{stat.value}</strong>

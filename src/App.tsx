@@ -14,29 +14,32 @@ export default function App() {
   const { lang, t } = useLanguage();
 
   return (
-    <main className="site-shell">
+    <div className="site-shell">
+      <a href="#main-content" className="skip-link">{t.nav.skip}</a>
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
 
       <Header />
 
-      <Hero t={t} lang={lang} />
+      <main id="main-content" tabIndex={-1}>
+        <Hero t={t} lang={lang} />
 
-      <Ticker />
+        <Ticker />
 
-      <Stats t={t} />
+        <Stats t={t} />
 
-      <About t={t} />
+        <About t={t} />
 
-      <Experience t={t} />
+        <Experience t={t} />
 
-      <Projects t={t} />
+        <Projects t={t} />
 
-      <Skills t={t} />
+        <Skills t={t} />
 
-      <Contact t={t} />
+        <Contact t={t} />
 
+      </main>
       <Footer t={t} />
-    </main>
+    </div>
   );
 }

@@ -536,3 +536,9 @@
     align-items: stretch;
   }
 }
+
+.status-dot { animation-iteration-count: 2; }
+.hero-profile-image > i { color: var(--foreground); }
+
+/* Reserve the decorative wordmark box before web fonts finish loading. */
+.hero-prologue { width: 100%; height: 0.7em; white-space: nowrap; text-align: right; }

@@ -1,3 +1,4 @@
+import { LanguageSwitch } from "../ui/LanguageSwitch";
 import { MenuIcon } from "../ui";
 import { NAV_LINKS } from "../../data";
 import type { Translations } from "../../Language";
@@ -11,29 +12,20 @@ interface NavProps {
 }
 
 export function Nav({ t, lang, onToggleLang, onOpenNav, isOpen }: NavProps) {
-  const navLabels = {
-    about: t.nav.about,
-    projects: t.nav.projects,
-    skills: t.nav.skills,
-    contact: t.nav.contact,
-  };
-
   return (
-    <nav className="nav-wrap" aria-label="Primary navigation">
-      <a className="brand" href="#top" aria-label="Homepage">
+    <nav className="nav-wrap" aria-label={t.nav.primary}>
+      <a className="brand" href="#top" aria-label={`Adrian.dev — ${t.nav.home}`}>
         Adrian<span>.dev</span>
       </a>
       <div className="nav-links">
         {NAV_LINKS.map((l) => (
           <a key={l} href={`#${l}`}>
-            {navLabels[l]}
+            {t.nav[l]}
           </a>
         ))}
       </div>
       <div className="nav-actions">
-        <button className="nav-ghost" onClick={onToggleLang} type="button">
-          {lang === "en" ? "PL" : "EN"}
-        </button>
+        <LanguageSwitch lang={lang} label={t.nav.switchLanguage} onToggle={onToggleLang} />
         <a className="nav-cta" href="#contact">
           {t.nav.hireMe} <span>→</span>
         </a>

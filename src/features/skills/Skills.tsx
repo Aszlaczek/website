@@ -1,4 +1,5 @@
 import { SectionTitle } from "../../components/ui";
+import { AiWorkflow } from "./AiWorkflow";
 import { SkillGroup } from "./SkillGroup";
 import type { Translations } from "../../Language";
 
@@ -59,6 +60,7 @@ export function Skills({ t }: SkillsProps) {
           </div>
         </div>
       </div>
+      <AiWorkflow t={t.workflow} />
     </section>
   );
 }

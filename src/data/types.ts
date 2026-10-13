@@ -1,15 +1,18 @@
 import type { Translations } from "../Language";
 
-export type Lang = "en" | "pl";
+export type { Lang } from "../Language";
 
 export type TickerItem = (typeof import("./constants").TICKER_ITEMS)[number];
 
-export interface Project {
-  num: string;
-  title: string;
-  year: string;
-  tone: string;
-  stack: readonly string[];
+export type Project = (typeof import("./constants").PROJECTS)[number];
+
+export interface ProjectCopy {
+  tag: string;
+  desc: string;
+  problem: string;
+  decisions: string[];
+  outcome: string;
+  note?: string;
 }
 
 export interface Stat {

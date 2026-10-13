@@ -6,68 +6,64 @@ import {
   type ReactNode,
 } from "react";
 import { translations, type Lang, type Translations } from "../Language";
+import { applySeo } from "../lib/seo";
+import { publicAsset } from "../lib/assets";
 
 interface LanguageCtx {
   lang: Lang;
   t: Translations;
   toggle: () => void;
 }
-
 const LanguageContext = createContext<LanguageCtx | null>(null);
 
-function getInitialLang(): Lang {
-  if (typeof window !== "undefined") {
-    const param = new URLSearchParams(window.location.search).get("lang");
-    if (param === "en" || param === "pl") return param;
-  }
+export function getInitialLang(): Lang {
+  const param = new URLSearchParams(window.location.search).get("lang");
+  if (param === "en" || param === "pl") return param;
+  const pathLang = window.location.pathname.match(/\/(en|pl)\/?$/)?.[1];
+  if (pathLang === "en" || pathLang === "pl") return pathLang;
   try {
     const saved = localStorage.getItem("lang");
     if (saved === "en" || saved === "pl") return saved;
   } catch {
-    /* localStorage unavailable (private mode / SSR) */
+    /* Storage may be disabled. */
   }
-  if (typeof navigator !== "undefined" && navigator.language?.startsWith("pl"))
-    return "pl";
-  return "en";
+  return navigator.language?.toLowerCase().startsWith("pl") ? "pl" : "en";
 }
 
-function applyLang(lang: Lang, syncUrl: boolean) {
-  document.documentElement.setAttribute("lang", lang);
-  try {
-    localStorage.setItem("lang", lang);
-  } catch {
-    /* ignore */
-  }
-  if (
-    syncUrl &&
-    typeof window !== "undefined" &&
-    window.history?.replaceState
-  ) {
-    const url = new URL(window.location.href);
-    url.searchParams.set("lang", lang);
-    window.history.replaceState(null, "", url);
-  }
-}
-
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Start with "en" so hydration always matches the prerendered HTML,
-  // then switch to the visitor's language after mount.
-  const [lang, setLang] = useState<Lang>("en");
+export function LanguageProvider({
+  children,
+  initialLang = "en",
+}: {
+  children: ReactNode;
+  initialLang?: Lang;
+}) {
+  // The initial value must match the language of the prerendered document.
+  const [lang, setLang] = useState<Lang>(initialLang);
 
   useEffect(() => {
-    setLang(getInitialLang());
+    const sync = () => setLang(getInitialLang());
+    sync();
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
   }, []);
 
   useEffect(() => {
-    document.documentElement.setAttribute("lang", lang);
+    document.documentElement.lang = lang;
+    applySeo(lang);
   }, [lang]);
 
   function toggle() {
-    setLang((prev) => {
-      const next = prev === "en" ? "pl" : "en";
-      applyLang(next, true);
-      return next;
-    });
+    const next = lang === "en" ? "pl" : "en";
+    try {
+      localStorage.setItem("lang", next);
+    } catch {
+      /* Optional persistence. */
+    }
+    const url = new URL(window.location.href);
+    url.pathname = publicAsset(`${next}/`);
+    url.searchParams.delete("lang");
+    window.history.replaceState(null, "", url);
+    setLang(next);
   }
 
   return (

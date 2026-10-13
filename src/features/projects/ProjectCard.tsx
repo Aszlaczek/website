@@ -1,55 +1,37 @@
-import { ArrowIcon } from "../../components/ui";
-import type { Project } from "../../data";
+import type { Project, ProjectCopy } from "../../data/types";
 import type { Translations } from "../../Language";
 
 interface ProjectCardProps {
   project: Project;
-  t: Translations["projects"]["items"][0];
+  t: ProjectCopy;
+  labels: Translations["projects"];
+  hidden: boolean;
 }
 
-export function ProjectCard({ project, t }: ProjectCardProps) {
+export function ProjectCard({ project, t, labels, hidden }: ProjectCardProps) {
   return (
-    <article className={`project-card project-${project.tone} reveal`}>
-      <div className="project-meta">
-        <span>{t.tag}</span>
-        <span>{project.year}</span>
-      </div>
-      <div className="project-number">{project.num}</div>
-      <h3>{project.title}</h3>
+    <article className={`project-card project-${project.tone} reveal`} hidden={hidden} aria-labelledby={`project-${project.id}`}>
+      <div className="project-meta"><span>{t.tag}</span></div>
+      <div className="project-number" aria-hidden="true">{project.num}</div>
+      <h3 id={`project-${project.id}`}>{project.title}</h3>
       <p>{t.desc}</p>
+      <dl className="project-facts">
+        <div><dt>{labels.problem}</dt><dd>{t.problem}</dd></div>
+        <div><dt>{labels.outcome}</dt><dd>{t.outcome}</dd></div>
+      </dl>
+      {t.note && <p className="project-note">{t.note}</p>}
+      <details className="project-details">
+        <summary>{labels.details}<span className="sr-only"> — {project.title}</span></summary>
+        <ul>{t.decisions.map((decision) => <li key={decision}>{decision}</li>)}</ul>
+      </details>
       <div className="project-footer">
-        <div>
-          {project.stack.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
+        <ul className="project-stack" aria-label={`${project.title} — stack`}>
+          {project.stack.map((item) => <li key={item}>{item}</li>)}
+        </ul>
         <div className="project-links">
-          <a
-            className="project-link"
-            href={t.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Demo →
-          </a>
-          <a
-            className="project-link"
-            href={t.code}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Code →
-          </a>
+          <a className="project-link" href={project.demo} target="_blank" rel="noopener noreferrer" aria-label={`Demo — ${project.title}`}>Demo ↗</a>
+          <a className="project-link" href={project.code} target="_blank" rel="noopener noreferrer" aria-label={`${labels.code} — ${project.title}`}>{labels.code} ↗</a>
         </div>
-        <a
-          className="project-arrow"
-          href={t.demo}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Demo — ${project.title}`}
-        >
-          <ArrowIcon />
-        </a>
       </div>
     </article>
   );

@@ -1,3 +1,4 @@
+import { LanguageSwitch } from "../ui/LanguageSwitch";
 import type { Ref } from "react";
 import { CloseIcon, ArrowIcon } from "../ui";
 import { NAV_LINKS } from "../../data";
@@ -13,13 +14,6 @@ interface NavSheetProps {
 }
 
 export function NavSheet({ ref, isOpen, onClose, t, lang, onToggleLang }: NavSheetProps) {
-  const navLabels = {
-    about: t.nav.about,
-    projects: t.nav.projects,
-    skills: t.nav.skills,
-    contact: t.nav.contact,
-  };
-
   return (
     <div
       ref={ref}
@@ -48,15 +42,13 @@ export function NavSheet({ ref, isOpen, onClose, t, lang, onToggleLang }: NavShe
           {NAV_LINKS.map((l) => (
             <li key={l}>
               <a href={`#${l}`} onClick={onClose}>
-                {navLabels[l]}
+                {t.nav[l]}
               </a>
             </li>
           ))}
         </ul>
         <div className="nav-sheet-foot">
-          <button className="nav-ghost" onClick={onToggleLang} type="button">
-            {lang === "en" ? "PL" : "EN"}
-          </button>
+          <LanguageSwitch lang={lang} label={t.nav.switchLanguage} onToggle={onToggleLang} />
           <a className="nav-cta" href="#contact" onClick={onClose}>
             {t.nav.hireMe} <ArrowIcon />
           </a>

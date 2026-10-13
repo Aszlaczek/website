@@ -254,3 +254,11 @@
     gap: 22px;
   }
 }
+.ai-workflow { margin-top: 64px; padding: clamp(24px, 4vw, 40px); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); background: var(--glass); }
+.ai-workflow h3 { margin: 0 0 16px; font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); }
+.ai-workflow p { max-width: 850px; color: var(--muted); font-size: 15px; line-height: 1.75; }
+.ai-workflow ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 32px; padding-left: 24px; margin-block: 28px; }
+.ai-workflow li { padding-left: 4px; font-size: 14px; line-height: 1.6; }
+.ai-workflow li::marker { color: var(--lime); font-family: var(--font-mono); }
+.ai-workflow .workflow-docs { margin-bottom: 0; font-size: 13px; }
+@media (max-width: 720px) { .ai-workflow ol { grid-template-columns: 1fr; } }
