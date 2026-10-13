@@ -142,7 +142,8 @@
   background: var(--violet);
   transform: rotate(-2deg) scaleX(0);
   transform-origin: left;
-  animation: draw-line var(--duration-animation) 700ms var(--ease-fluent) forwards;
+  animation: draw-line var(--duration-animation) 700ms var(--ease-fluent)
+    forwards;
 }
 
 .hero-bottom {
@@ -358,18 +359,18 @@
 .profile-stats {
   display: grid;
   grid-template-columns: 0.8fr 0.8fr 0.8fr;
-  flex: 1 0 1;
+  flex: 1 0 auto;
   min-height: 104px;
   border-top: 1px solid var(--line);
 }
 
 .profile-stats > div {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: min-content min-content;
   padding: 20px 11px 8px;
   border-right: 1px solid var(--line);
-  align-items: center;
-  justify-content: end;
+  text-align: center;
+  justify-content: center;
 }
 
 .profile-stats > div:first-child {
@@ -454,12 +455,14 @@
     inset: 0 -30px auto auto;
     width: 260px;
     height: 390px;
+    animation: none;
     opacity: 0.35;
     transform: scale(0.72);
     transform-origin: top right;
   }
 
   .hero-profile-image {
+    flex-basis: 190px;
     height: 190px;
   }
 

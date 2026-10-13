@@ -1,8 +1,10 @@
+import type { Ref } from "react";
 import { CloseIcon, ArrowIcon } from "../ui";
 import { NAV_LINKS } from "../../data";
 import type { Translations } from "../../Language";
 
 interface NavSheetProps {
+  ref: Ref<HTMLDivElement>;
   isOpen: boolean;
   onClose: () => void;
   t: Translations;
@@ -10,7 +12,7 @@ interface NavSheetProps {
   onToggleLang: () => void;
 }
 
-export function NavSheet({ isOpen, onClose, t, lang, onToggleLang }: NavSheetProps) {
+export function NavSheet({ ref, isOpen, onClose, t, lang, onToggleLang }: NavSheetProps) {
   const navLabels = {
     about: t.nav.about,
     projects: t.nav.projects,
@@ -20,6 +22,8 @@ export function NavSheet({ isOpen, onClose, t, lang, onToggleLang }: NavSheetPro
 
   return (
     <div
+      ref={ref}
+      inert={!isOpen}
       id="nav-sheet"
       className={`nav-sheet${isOpen ? " is-open" : ""}`}
       role="dialog"

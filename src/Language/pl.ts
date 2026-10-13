@@ -1,4 +1,4 @@
-import { KARATE_IMAGE, CAMP_IMAGE } from "@/data";
+import { KARATE_IMAGE, CAMP_IMAGE, WORKSPACE_IMAGE } from "@/data";
 import type { en } from "./en";
 
 export const pl: typeof en = {
@@ -54,8 +54,7 @@ export const pl: typeof en = {
         lead: "Potem od kolejnego. I nagle budowałem.",
         body: "Informatyka dała tej ciekawości język. Kod stał się moim sposobem, by w gąszczu znaleźć wzorzec i zamienić go w użyteczny produkt. Każdy rozwiązany problem sprawiał, że chciałem kolejnego — trudniejszego.",
         lesson: "Ciekawość → rzemiosło",
-        image:
-          "https://images.unsplash.com/photo-1650661926447-9efb2610f64c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        image: WORKSPACE_IMAGE,
         alt: "Laptop na biurku developera",
         tone: "code",
       },

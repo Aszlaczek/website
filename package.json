@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "deploy": "vite build && tsx scripts/prerender.tsx && gh-pages -d dist",
     "assets": "node scripts/generate-assets.mjs",
-    "analyze": "ANALYZE=true vite build"
+    "analyze": "ANALYZE=true vite build",
+    "images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",

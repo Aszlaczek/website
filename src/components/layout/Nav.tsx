@@ -7,9 +7,10 @@ interface NavProps {
   lang: "en" | "pl";
   onToggleLang: () => void;
   onOpenNav: () => void;
+  isOpen: boolean;
 }
 
-export function Nav({ t, lang, onToggleLang, onOpenNav }: NavProps) {
+export function Nav({ t, lang, onToggleLang, onOpenNav, isOpen }: NavProps) {
   const navLabels = {
     about: t.nav.about,
     projects: t.nav.projects,
@@ -41,7 +42,7 @@ export function Nav({ t, lang, onToggleLang, onOpenNav }: NavProps) {
           onClick={onOpenNav}
           type="button"
           aria-label={t.nav.menu}
-          aria-expanded="false"
+          aria-expanded={isOpen}
           aria-controls="nav-sheet"
         >
           <MenuIcon />

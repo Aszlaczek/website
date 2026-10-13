@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { PROJECTS } from "../../data";
 import { ProjectCard } from "./ProjectCard";
 import { SectionTitle } from "../../components/ui";
@@ -5,12 +6,10 @@ import type { Translations } from "../../Language";
 
 interface ProjectsProps {
   t: Translations;
-  showAll: boolean;
-  onToggleShowAll: () => void;
 }
 
-export function Projects({ t, showAll, onToggleShowAll }: ProjectsProps) {
-  const visibleProjects = showAll ? PROJECTS : PROJECTS.slice(0, 3);
+export function Projects({ t }: ProjectsProps) {
+  const [showAll, setShowAll] = useState(false);
 
   return (
     <section className="section projects-section" id="projects">
@@ -23,7 +22,9 @@ export function Projects({ t, showAll, onToggleShowAll }: ProjectsProps) {
           </SectionTitle>
           <button
             className="filter-button"
-            onClick={onToggleShowAll}
+            onClick={() => setShowAll((current) => !current)}
+            aria-expanded={showAll}
+            aria-controls="projects-grid"
             type="button"
           >
             {showAll ? t.projects.featured : t.projects.all}
@@ -31,8 +32,8 @@ export function Projects({ t, showAll, onToggleShowAll }: ProjectsProps) {
           </button>
         </div>
 
-        <div className="projects-grid">
-          {visibleProjects.map((project, index) => (
+        <div id="projects-grid" className={`projects-grid${showAll ? " show-all" : ""}`}>
+          {PROJECTS.map((project, index) => (
             <ProjectCard
               key={project.num}
               project={project}

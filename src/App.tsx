@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
 import { useLanguage } from "./context/LanguageContext";
-import { useBodyScrollLock } from "./hooks";
-import { Nav, NavSheet, Footer } from "./components/layout";
+import { Footer } from "./components/layout/Footer";
+import { Header } from "./components/layout/Header";
 import { Hero } from "./features/hero/Hero";
 import { Ticker } from "./features/ticker/Ticker";
 import { Stats } from "./features/stats/Stats";
@@ -12,40 +11,14 @@ import { Skills } from "./features/skills/Skills";
 import { Contact } from "./features/contact/Contact";
 
 export default function App() {
-  const { lang, t, toggle } = useLanguage();
-  const [showAll, setShowAll] = useState(false);
-  const [navOpen, setNavOpen] = useState(false);
-
-  useBodyScrollLock(navOpen);
-
-  useEffect(() => {
-    if (!navOpen) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setNavOpen(false);
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [navOpen]);
+  const { lang, t } = useLanguage();
 
   return (
     <main className="site-shell">
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
 
-      <Nav
-        t={t}
-        lang={lang}
-        onToggleLang={toggle}
-        onOpenNav={() => setNavOpen(true)}
-      />
-
-      <NavSheet
-        isOpen={navOpen}
-        onClose={() => setNavOpen(false)}
-        t={t}
-        lang={lang}
-        onToggleLang={toggle}
-      />
+      <Header />
 
       <Hero t={t} lang={lang} />
 
@@ -57,11 +30,7 @@ export default function App() {
 
       <Experience t={t} />
 
-      <Projects
-        t={t}
-        showAll={showAll}
-        onToggleShowAll={() => setShowAll((current) => !current)}
-      />
+      <Projects t={t} />
 
       <Skills t={t} />
 

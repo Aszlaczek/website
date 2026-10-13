@@ -100,7 +100,23 @@
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" />
+      <style>
+        .reveal, .title-line, .hero-chapter-label { animation: none !important; opacity: 1 !important; transform: none !important; }
+        .hero-profile-card { animation: none !important; }
+        .projects-grid .project-card { display: flex !important; }
+        .filter-button, .nav-hamburger, .nav-ghost { display: none !important; }
+        @media (max-width: 720px) {
+          .nav-wrap { flex-wrap: wrap !important; justify-content: center !important; gap: 12px !important; padding: 12px !important; }
+          .nav-links { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; gap: 14px !important; }
+          .nav-actions { display: none !important; }
+        }
+      </style>
+    </noscript>
 
     <!-- ── Schema.org JSON-LD — Person ───────────────────────────────────── -->
     <script type="application/ld+json">
