@@ -199,6 +199,9 @@
   right: 0;
   bottom: 0;
   left: 0;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 20px 20px max(20px, env(safe-area-inset-bottom));
   border-top: 1px solid var(--glass-border);
   border-radius: 28px 28px 0 0;

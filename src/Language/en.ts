@@ -1,4 +1,4 @@
-import { KARATE_IMAGE, CAMP_IMAGE } from "@/data";
+import { KARATE_IMAGE, CAMP_IMAGE, WORKSPACE_IMAGE } from "@/data";
 export type Lang = "en" | "pl";
 
 export const en = {
@@ -54,8 +54,7 @@ export const en = {
         lead: "Then another. And suddenly, I was building.",
         body: "Computer Science gave that curiosity a language. Code became my way of taking something tangled, finding the pattern inside it and turning it into a useful product. Every solved problem made me hungry for a harder one.",
         lesson: "Curiosity → craft",
-        image:
-          "https://images.unsplash.com/photo-1650661926447-9efb2610f64c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=85&w=1600",
+        image: WORKSPACE_IMAGE,
         alt: "Laptop on a developer's desk",
         tone: "code",
       },

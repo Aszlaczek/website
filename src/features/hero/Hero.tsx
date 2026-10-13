@@ -49,7 +49,7 @@ export function Hero({ t, lang }: HeroProps) {
             </a>
             <a
               className="button button-ghost"
-              href={`files/Adrian_Wzorek_CV_${lang}.pdf`}
+              href={`files/CV_AdrianWzorek_${lang}.pdf`}
             >
               {t.hero.downloadCv} <span>↓</span>
             </a>
@@ -79,8 +79,10 @@ function HeroProfileCard({ about, stats }: HeroProfileCardProps) {
     <figure className="hero-profile-card">
       <div className="hero-profile-image">
         <img
-          src={PROFILE_IMAGE}
-          alt="Laptop in a focused developer workspace"
+          {...PROFILE_IMAGE}
+          sizes="(max-width: 720px) calc(100vw - 58px), (max-width: 980px) 234px, 354px"
+          fetchPriority="high"
+          alt="Adrian Wzorek"
         />
         <span>{about.openToWork}</span>
         <i>{about.relocation}</i>

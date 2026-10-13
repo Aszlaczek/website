@@ -5,26 +5,6 @@ import { renderToString } from "react-dom/server";
 import App from "../src/App";
 import { LanguageProvider } from "../src/context/LanguageContext";
 
-const storage = new Map<string, string>();
-
-const g = globalThis as Record<string, unknown>;
-if (typeof g.localStorage === "undefined") {
-  g.localStorage = {
-    getItem: (k: string) => storage.get(k) ?? null,
-    setItem: (k: string, v: string) => void storage.set(k, v),
-    removeItem: (k: string) => void storage.delete(k),
-  };
-}
-if (typeof g.navigator === "undefined") {
-  g.navigator = { language: "en" };
-} else if (!(g.navigator as { language?: string }).language) {
-  try {
-    Object.defineProperty(g.navigator, "language", { value: "en", configurable: true });
-  } catch {
-    /* navigator.language is not configurable — LanguageContext falls back to "en" */
-  }
-}
-
 const appHtml = renderToString(
   <LanguageProvider>
     <App />

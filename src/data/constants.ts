@@ -1,8 +1,11 @@
+import images from "./images.json";
+
 export const EMAIL = "awzorek23@gmail.com";
 
-export const PROFILE_IMAGE = "me.jpg";
-export const KARATE_IMAGE = "karate.jpg";
-export const CAMP_IMAGE = "camp.jpg";
+export const PROFILE_IMAGE = images.me;
+export const KARATE_IMAGE = images.karate;
+export const CAMP_IMAGE = images.camp;
+export const WORKSPACE_IMAGE = images.workspace;
 
 export const TICKER_ITEMS = [
   "React",

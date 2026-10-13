@@ -14,7 +14,13 @@ export function StoryChapter({ chapter, index }: StoryChapterProps) {
       key={chapter.number}
     >
       <div className="story-visual">
-        <img src={chapter.image} alt={chapter.alt} loading="lazy" />
+        <img
+          {...chapter.image}
+          sizes="(max-width: 720px) calc(100vw - 82px), (max-width: 1288px) calc((100vw - 48px) / 2), 620px"
+          alt={chapter.alt}
+          loading="lazy"
+          decoding="async"
+        />
         <div className="story-image-wash" />
         <span className="story-ghost-number">{chapter.number}</span>
       </div>

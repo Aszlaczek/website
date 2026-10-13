@@ -112,7 +112,6 @@
     inset 1px 0 0 rgba(255, 255, 255, 0.035),
     0 30px 80px rgba(0, 0, 0, 0.2);
   transform-style: preserve-3d;
-  will-change: transform;
   transition:
     transform 500ms var(--ease-fluent),
     border-color 350ms var(--ease-fluent),
@@ -308,4 +307,7 @@
     width: 100%;
     order: 3;
   }
+}
+.projects-grid:not(.show-all) .project-card:nth-child(n + 4) {
+  display: none;
 }

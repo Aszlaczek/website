@@ -17,10 +17,16 @@
 }
 
 @media (scripting: none) {
-  .reveal {
+  .reveal,
+  .title-line,
+  .hero-chapter-label {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  .hero-profile-card {
+    animation: none;
   }
 }
 
@@ -66,22 +72,6 @@
 @keyframes marquee {
   to {
     transform: translateX(-50%);
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    margin-top: 0;
-  }
-  50% {
-    margin-top: -12px;
   }
 }
 
