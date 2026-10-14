@@ -22,12 +22,19 @@ export function Contact({ t }: ContactProps) {
         </h2>
         <p className="reveal">{t.contact.desc}</p>
         <div className="contact-actions reveal">
-          <button className="email-button" onClick={() => void copy(EMAIL)} type="button" disabled={status === "pending"} aria-label={`${t.contact.copyEmail}: ${EMAIL}`}>
-            <span>{EMAIL}</span>
+          <button
+            className="email-button"
+            onClick={() => void copy(EMAIL)}
+            type="button"
+            disabled={status === "pending"}
+            aria-label={`${t.contact.copyEmail}: ${EMAIL}`}
+          >
+            <span>{status === "copied" ? t.contact.copied : EMAIL}</span>
             <ArrowIcon />
           </button>
-          <a className="button button-ghost" href={`mailto:${EMAIL}`}>{t.contact.sendEmail} <ArrowIcon /></a>
-          <p className="copy-status" role="status">{status === "copied" ? t.contact.copied : status === "error" ? t.contact.copyError : ""}</p>
+          <a className="button button-ghost" href={`mailto:${EMAIL}`}>
+            {t.contact.sendEmail} <ArrowIcon />
+          </a>
           <div className="social-links">
             <a
               href="https://github.com/Aszlaczek"

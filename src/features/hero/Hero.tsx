@@ -46,14 +46,16 @@ export function Hero({ t, lang }: HeroProps) {
           </div>
           <div className="hero-actions">
             <a className="button button-primary" href="#projects">
-              {t.hero.seeWork} <ArrowIcon />
+              {t.hero.seeWork}
             </a>
             <a
               className="button button-ghost"
-              href={publicAsset(`files/CV_AWzorek_new_${lang.toUpperCase()}.pdf`)}
+              href={publicAsset(
+                `files/CV_AWzorek_new_${lang.toUpperCase()}.pdf`,
+              )}
               download
             >
-              {t.hero.downloadCv} <span>↓</span>
+              {t.hero.downloadCv} <ArrowIcon />
             </a>
           </div>
         </div>

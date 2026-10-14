@@ -70,6 +70,16 @@ const projectItems: Record<ProjectId, ProjectCopy> = {
     ],
     outcome: "Osiem par, licznik ruchów i możliwość rozpoczęcia nowej gry.",
   },
+  "custom-components": {
+    tag: "Biblioteka UI",
+    desc: "Wielokrotnego użytku komponenty do budowania aplikacji internetowych.",
+    problem: "Niespójny design i zachowanie w różnych projektach.",
+    decisions: [
+      "Biblioteka komponentów standaryzuje elementy UI i interakcje.",
+      "Storybook prezentuje komponenty w izolacji, co ułatwia rozwój.",
+    ],
+    outcome: "Spójne, wielokrotnego użytku komponenty przyspieszające rozwój.",
+  },
 };
 
 export const pl: typeof en = {

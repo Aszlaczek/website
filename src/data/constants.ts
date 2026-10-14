@@ -89,6 +89,16 @@ export const PROJECTS = [
     code: "https://github.com/Aszlaczek/memory-game",
     featured: false,
   },
+  {
+    id: "custom-components",
+    num: "07",
+    title: "Custom Components",
+    tone: "cyan",
+    stack: ["HTML", "CSS", "JavaScript"],
+    demo: "https://icodethis.com/Aszlaczek",
+    code: "https://icodethis.com/Aszlaczek",
+    featured: false,
+  },
 ] as const;
 
 export type ProjectId = (typeof PROJECTS)[number]["id"];

@@ -70,6 +70,16 @@ const projectItems: Record<ProjectId, ProjectCopy> = {
     ],
     outcome: "Eight pairs, a move counter and a new-game flow.",
   },
+  "custom-components": {
+    tag: "UI library",
+    desc: "Reusable components for building web applications.",
+    problem: "Inconsistent design and behavior across different projects.",
+    decisions: [
+      "A component library standardizes UI elements and interactions.",
+      "Storybook showcases components in isolation for easier development.",
+    ],
+    outcome: "Consistent, reusable components that speed up development.",
+  },
 };
 
 export const en = {
