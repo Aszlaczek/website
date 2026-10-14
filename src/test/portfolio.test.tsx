@@ -109,7 +109,7 @@ describe("projects", () => {
       });
       expect(filter).toHaveAttribute("aria-expanded", "false");
       await userEvent.click(filter);
-      expect(screen.getAllByRole("article")).toHaveLength(6);
+      expect(screen.getAllByRole("article")).toHaveLength(7);
       expect(filter).toHaveAttribute("aria-expanded", "true");
       const calculator = screen.getByRole("article", { name: "Calculator" });
       expect(
@@ -188,11 +188,14 @@ describe("email", () => {
       value: { writeText },
     });
     render(<Contact t={en} />);
-    fireEvent.click(screen.getByRole("button", { name: /Copy email/ }));
+    const copyButton = screen.getByRole("button", { name: /Copy email/ });
+    fireEvent.click(copyButton);
     expect(writeText).toHaveBeenCalledWith(EMAIL);
-    expect(screen.getByRole("status")).toBeEmptyDOMElement();
+    expect(copyButton).toBeDisabled();
+    expect(copyButton).toHaveTextContent(EMAIL);
     await act(async () => finish());
-    expect(screen.getByRole("status")).toHaveTextContent(en.contact.copied);
+    expect(copyButton).toBeEnabled();
+    expect(copyButton).toHaveTextContent(en.contact.copied);
     expect(screen.getByRole("link", { name: /Send an email/ })).toHaveAttribute(
       "href",
       `mailto:${EMAIL}`,
@@ -209,12 +212,10 @@ describe("email", () => {
         value: clipboard,
       });
       render(<Contact t={pl} />);
-      fireEvent.click(screen.getByRole("button", { name: /Kopiuj adres/ }));
-      await waitFor(() =>
-        expect(screen.getByRole("status")).toHaveTextContent(
-          pl.contact.copyError,
-        ),
-      );
+      const copyButton = screen.getByRole("button", { name: /Kopiuj adres/ });
+      fireEvent.click(copyButton);
+      await waitFor(() => expect(copyButton).toBeEnabled());
+      expect(copyButton).toHaveTextContent(EMAIL);
       expect(screen.queryByText(pl.contact.copied)).not.toBeInTheDocument();
     },
   );
@@ -228,8 +229,13 @@ describe("email", () => {
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: /Copy email/ }));
     });
+    expect(screen.getByRole("button", { name: /Copy email/ })).toHaveTextContent(
+      en.contact.copied,
+    );
     act(() => vi.advanceTimersByTime(1800));
-    expect(screen.getByRole("status")).toBeEmptyDOMElement();
+    expect(screen.getByRole("button", { name: /Copy email/ })).toHaveTextContent(
+      EMAIL,
+    );
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: /Copy email/ }));
     });
