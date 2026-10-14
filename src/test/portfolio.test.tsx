@@ -48,7 +48,7 @@ describe("language and CV", () => {
     expect(document.documentElement).toHaveAttribute("lang", "pl");
     expect(screen.getByRole("link", { name: /Pobierz CV/ })).toHaveAttribute(
       "href",
-      publicAsset("files/CV_AWzorek_new_PL.pdf"),
+      publicAsset("files/Wzorek_Adrian_CV_PL.pdf"),
     );
     await userEvent.click(screen.getByRole("button", { name: "Switch" }));
     expect(screen.getByRole("status")).toHaveTextContent("en");
@@ -58,7 +58,7 @@ describe("language and CV", () => {
     expect(localStorage.getItem("lang")).toBe("en");
     expect(screen.getByRole("link", { name: /Download CV/ })).toHaveAttribute(
       "href",
-      publicAsset("files/CV_AWzorek_new_EN.pdf"),
+      publicAsset("files/Wzorek_Adrian_CV_EN.pdf"),
     );
   });
   it("uses a language path ahead of saved preferences", () => {
@@ -229,13 +229,13 @@ describe("email", () => {
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: /Copy email/ }));
     });
-    expect(screen.getByRole("button", { name: /Copy email/ })).toHaveTextContent(
-      en.contact.copied,
-    );
+    expect(
+      screen.getByRole("button", { name: /Copy email/ }),
+    ).toHaveTextContent(en.contact.copied);
     act(() => vi.advanceTimersByTime(1800));
-    expect(screen.getByRole("button", { name: /Copy email/ })).toHaveTextContent(
-      EMAIL,
-    );
+    expect(
+      screen.getByRole("button", { name: /Copy email/ }),
+    ).toHaveTextContent(EMAIL);
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: /Copy email/ }));
     });

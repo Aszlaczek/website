@@ -51,7 +51,7 @@ export function Hero({ t, lang }: HeroProps) {
             <a
               className="button button-ghost"
               href={publicAsset(
-                `files/CV_AWzorek_new_${lang.toUpperCase()}.pdf`,
+                `files/Wzorek_Adrian_CV_${lang.toUpperCase()}.pdf`,
               )}
               download
             >
